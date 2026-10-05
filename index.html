@@ -356,6 +356,9 @@
       font-size: 11px;
       cursor: pointer;
       font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
     .submit-btn:hover {
@@ -464,6 +467,9 @@
       padding: 2px 8px;
       cursor: pointer;
       font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
     .auth-btn.logout {
@@ -498,6 +504,10 @@
       text-align: center;
       cursor: pointer;
       box-shadow: 1px 1px 0px #ff9999 inset;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
     }
 
     .mail-folder-list {
@@ -524,6 +534,12 @@
       background-color: #0059b3;
       color: white;
       font-weight: bold;
+    }
+
+    .mail-folder-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
     }
 
     .mail-main {
@@ -634,9 +650,75 @@
       padding: 10px 0;
       min-height: 120px;
     }
+
+    /* GLOSSY SVG ICON ENGINE STYLES */
+    .glossy-icon {
+      width: 14px;
+      height: 14px;
+      vertical-align: middle;
+      display: inline-block;
+      filter: drop-shadow(0px 1px 1px rgba(0,0,0,0.3));
+    }
   </style>
 </head>
 <body>
+
+  <!-- SVG REUSABLE GLOSSY ICONS DEFINITIONS -->
+  <svg style="display:none;">
+    <defs>
+      <!-- Glossy Key Icon -->
+      <g id="icon-key">
+        <circle cx="6" cy="6" r="4.5" fill="#ffd700" stroke="#b8860b" stroke-width="1"/>
+        <circle cx="6" cy="6" r="2" fill="#000"/>
+        <path d="M9 7 L15 13 L13.5 14.5 L12 13 L11 14 L9.5 12.5 L10.5 11.5 Z" fill="#ffd700" stroke="#b8860b" stroke-width="1"/>
+        <ellipse cx="5" cy="4.5" rx="3" ry="1.5" fill="#ffffff" opacity="0.6"/>
+      </g>
+
+      <!-- Glossy Create Account Plus Icon -->
+      <g id="icon-plus-badge">
+        <circle cx="8" cy="8" r="7" fill="#00aaff" stroke="#005588" stroke-width="1"/>
+        <ellipse cx="8" cy="4.5" rx="5" ry="2.5" fill="#ffffff" opacity="0.6"/>
+        <rect x="7" y="4" width="2" height="8" fill="#ffffff"/>
+        <rect x="4" y="7" width="8" height="2" fill="#ffffff"/>
+      </g>
+
+      <!-- Glossy Pencil Compose Icon -->
+      <g id="icon-pencil">
+        <path d="M2 14 L3 10 L11 2 L14 5 L6 13 Z" fill="#ffcc00" stroke="#997700" stroke-width="0.8"/>
+        <polygon points="2,14 3,10 6,13" fill="#ff3333"/>
+        <polygon points="2,14 2.5,12 4,13.5" fill="#333333"/>
+        <path d="M11 2 L14 5 L12.5 6.5 L9.5 3.5 Z" fill="#ff9999"/>
+      </g>
+
+      <!-- Glossy Inbox Down Arrow Icon -->
+      <g id="icon-inbox">
+        <rect x="2" y="2" width="12" height="12" rx="2" fill="#2b72d0" stroke="#003366" stroke-width="1"/>
+        <ellipse cx="8" cy="5" rx="5" ry="2" fill="#ffffff" opacity="0.6"/>
+        <polygon points="8,12 4,7 7,7 7,4 9,4 9,7 12,7" fill="#ffffff"/>
+      </g>
+
+      <!-- Glossy Sent Out Arrow Icon -->
+      <g id="icon-sent">
+        <rect x="2" y="2" width="12" height="12" rx="2" fill="#00aa44" stroke="#004411" stroke-width="1"/>
+        <ellipse cx="8" cy="5" rx="5" ry="2" fill="#ffffff" opacity="0.6"/>
+        <polygon points="8,4 12,9 9,9 9,12 7,12 7,9 4,9" fill="#ffffff"/>
+      </g>
+
+      <!-- Glossy Exit / Logout Icon -->
+      <g id="icon-logout">
+        <circle cx="8" cy="8" r="7" fill="#cc0000" stroke="#660000" stroke-width="1"/>
+        <ellipse cx="8" cy="4.5" rx="5" ry="2.5" fill="#ffffff" opacity="0.6"/>
+        <rect x="7" y="3" width="2" height="5" fill="#ffffff"/>
+        <path d="M5 6 A 4.5 4.5 0 1 0 11 6" fill="none" stroke="#ffffff" stroke-width="1.8"/>
+      </g>
+
+      <!-- Glossy Send Arrow Icon -->
+      <g id="icon-send">
+        <polygon points="2,2 14,8 2,14 5,8" fill="#00cc44" stroke="#005511" stroke-width="1"/>
+        <polygon points="2,2 14,8 5,8" fill="#ffffff" opacity="0.4"/>
+      </g>
+    </defs>
+  </svg>
 
   <div class="crt-screen-container">
     
@@ -740,7 +822,9 @@
                 <textarea id="userMsg" rows="3" placeholder="Write your story here..." required></textarea>
               </div>
               <div class="btn-row">
-                <button type="submit" class="submit-btn">Send Message</button>
+                <button type="submit" class="submit-btn">
+                  <svg class="glossy-icon" viewBox="0 0 16 16"><use href="#icon-send"/></svg> Send Message
+                </button>
                 <button type="button" class="submit-btn" onclick="showView('webmail')" style="background:#ccffcc;">Open My Greenbox Mail</button>
               </div>
             </form>
@@ -792,20 +876,31 @@
       <div class="mail-account-bar">
         <div><strong>Active Account:</strong> <span id="currentAccountDisplay" style="color:#79ff4d;">Guest (Not Logged In)</span></div>
         <div class="account-auth-btns" id="authNavBtns">
-          <button class="auth-btn" onclick="showMailSection('login')">🔑 Sign In</button>
-          <button class="auth-btn" onclick="showMailSection('register')" style="background:#0059b3;">✨ Create Account</button>
+          <button class="auth-btn" onclick="showMailSection('login')">
+            <svg class="glossy-icon" viewBox="0 0 16 16"><use href="#icon-key"/></svg> Sign In
+          </button>
+          <button class="auth-btn" onclick="showMailSection('register')" style="background:#0059b3;">
+            <svg class="glossy-icon" viewBox="0 0 16 16"><use href="#icon-plus-badge"/></svg> Create Account
+          </button>
         </div>
       </div>
 
       <div class="mail-container">
         <div class="mail-sidebar">
-          <button class="mail-compose-btn" onclick="checkAuthAndCompose()">✏ COMPOSE MAIL</button>
+          <button class="mail-compose-btn" onclick="checkAuthAndCompose()">
+            <svg class="glossy-icon" viewBox="0 0 16 16"><use href="#icon-pencil"/></svg> COMPOSE MAIL
+          </button>
           <ul class="mail-folder-list">
             <li id="folder-inbox" class="active-folder" onclick="showMailSection('inbox')">
-              <span>📥 Inbox</span> <span id="unreadCountBadge" style="font-size:9px;">(0)</span>
+              <span class="mail-folder-item">
+                <svg class="glossy-icon" viewBox="0 0 16 16"><use href="#icon-inbox"/></svg> Inbox
+              </span> 
+              <span id="unreadCountBadge" style="font-size:9px;">(0)</span>
             </li>
             <li id="folder-sent" onclick="showMailSection('sent')">
-              <span>📤 Sent Items</span>
+              <span class="mail-folder-item">
+                <svg class="glossy-icon" viewBox="0 0 16 16"><use href="#icon-sent"/></svg> Sent Items
+              </span>
             </li>
           </ul>
 
@@ -870,7 +965,9 @@
                 <input type="password" id="loginPassword" placeholder="••••••••" required>
               </div>
               <div>
-                <button type="submit" class="submit-btn" style="background:#ccffcc;">🔑 Sign In</button>
+                <button type="submit" class="submit-btn" style="background:#ccffcc;">
+                  <svg class="glossy-icon" viewBox="0 0 16 16"><use href="#icon-key"/></svg> Sign In
+                </button>
                 <button type="button" class="submit-btn" onclick="showMailSection('register')">Create Account</button>
               </div>
             </form>
@@ -893,7 +990,9 @@
                 <input type="password" id="regPassword" placeholder="••••••••" required>
               </div>
               <div>
-                <button type="submit" class="submit-btn" style="background:#79ff4d;">✨ Register Account</button>
+                <button type="submit" class="submit-btn" style="background:#79ff4d;">
+                  <svg class="glossy-icon" viewBox="0 0 16 16"><use href="#icon-plus-badge"/></svg> Register Account
+                </button>
                 <button type="button" class="submit-btn" onclick="showMailSection('login')">Back to Login</button>
               </div>
             </form>
@@ -915,7 +1014,9 @@
               </div>
               <textarea class="compose-textarea" id="composeBody" placeholder="Type your email message here..." required></textarea>
               <div>
-                <button type="submit" class="submit-btn" style="background:#ccffcc;">🚀 Send Email</button>
+                <button type="submit" class="submit-btn" style="background:#ccffcc;">
+                  <svg class="glossy-icon" viewBox="0 0 16 16"><use href="#icon-send"/></svg> Send Email
+                </button>
                 <button type="button" class="submit-btn" onclick="showMailSection('inbox')">Cancel</button>
               </div>
             </form>
@@ -1013,7 +1114,9 @@
       currentAccount = email;
       document.getElementById('currentAccountDisplay').innerText = email;
       document.getElementById('authNavBtns').innerHTML = `
-        <button class="auth-btn logout" onclick="logoutUser()">🚪 Log Out</button>
+        <button class="auth-btn logout" onclick="logoutUser()">
+          <svg class="glossy-icon" viewBox="0 0 16 16"><use href="#icon-logout"/></svg> Log Out
+        </button>
       `;
       showMailSection('inbox');
       renderMailbox();
@@ -1023,8 +1126,12 @@
       currentAccount = null;
       document.getElementById('currentAccountDisplay').innerText = 'Guest (Not Logged In)';
       document.getElementById('authNavBtns').innerHTML = `
-        <button class="auth-btn" onclick="showMailSection('login')">🔑 Sign In</button>
-        <button class="auth-btn" onclick="showMailSection('register')" style="background:#0059b3;">✨ Create Account</button>
+        <button class="auth-btn" onclick="showMailSection('login')">
+          <svg class="glossy-icon" viewBox="0 0 16 16"><use href="#icon-key"/></svg> Sign In
+        </button>
+        <button class="auth-btn" onclick="showMailSection('register')" style="background:#0059b3;">
+          <svg class="glossy-icon" viewBox="0 0 16 16"><use href="#icon-plus-badge"/></svg> Create Account
+        </button>
       `;
       showMailSection('login');
     }
