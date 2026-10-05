@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Greenbox - Speedframe</title>
+  <title>Greenbox Systems</title>
+  
+  <!-- Firebase SDKs for Realtime Cloud Sync -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+
   <style>
     * {
       box-sizing: border-box;
@@ -24,8 +30,7 @@
 
     .crt-screen-container {
       width: 100%;
-      max-width: 800px;
-      aspect-ratio: 1 / 1;
+      max-width: 820px;
       background-color: #ffffff;
       border: 2px solid #555;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
@@ -33,8 +38,10 @@
       flex-direction: column;
       overflow: hidden;
       position: relative;
+      min-height: 700px;
     }
 
+    /* Top Black Header */
     .top-header {
       background-color: #000000;
       color: #ffffff;
@@ -51,6 +58,7 @@
       gap: 10px;
       text-decoration: none;
       color: white;
+      cursor: pointer;
     }
 
     .brand-logo-img {
@@ -68,12 +76,19 @@
       color: #ffffff;
       text-decoration: none;
       margin: 0 4px;
+      cursor: pointer;
     }
 
     .header-links a:hover {
       text-decoration: underline;
     }
 
+    .header-links .my-greenbox-link {
+      color: #79ff4d;
+      font-weight: bold;
+    }
+
+    /* Navigation Bar */
     .nav-bar {
       background-color: #000000;
       border-top: 1px solid #333;
@@ -87,12 +102,25 @@
     .nav-bar a {
       color: #ffffff;
       text-decoration: none;
+      cursor: pointer;
     }
 
     .nav-bar a:hover {
       color: #79ff4d;
     }
 
+    /* Views */
+    .page-view {
+      display: none;
+      flex: 1;
+    }
+
+    .page-view.active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Homepage Grid Layout */
     .main-body {
       flex: 1;
       display: grid;
@@ -161,6 +189,7 @@
       gap: 12px;
     }
 
+    /* Product Hero Box */
     .product-hero-box {
       border: 1px solid #b0b0b0;
       background: linear-gradient(180deg, #f0f0f0 0%, #e4e4e4 100%);
@@ -225,11 +254,7 @@
       cursor: pointer;
     }
 
-    .download-btn:active {
-      box-shadow: -1px -1px 0px #fff inset, 1px 1px 0px #888 inset;
-      background: #bbb;
-    }
-
+    /* Live Canvas Preview Box */
     .demo-container {
       border: 1px solid #aaa;
       background: #eeeeee;
@@ -257,6 +282,7 @@
       margin-top: 4px;
     }
 
+    /* Article & Contact Form */
     .article-section h3 {
       font-size: 14px;
       font-weight: bold;
@@ -308,18 +334,26 @@
       font-family: Arial, sans-serif;
     }
 
+    .btn-row {
+      display: flex;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
     .submit-btn {
       background: #e1e1e1;
       border: 1px solid #707070;
       padding: 3px 12px;
       font-size: 11px;
       cursor: pointer;
+      font-weight: bold;
     }
 
     .submit-btn:hover {
       background: #eee;
     }
 
+    /* 2000s Right Sidebar Gel Orb Promos */
     .site-select-box {
       display: flex;
       gap: 4px;
@@ -395,6 +429,203 @@
       margin-top: 15px;
       line-height: 1.2;
     }
+
+    /* WEBMAIL VIEW STYLING */
+    .mail-account-bar {
+      background-color: #004080;
+      color: white;
+      padding: 6px 12px;
+      font-size: 11px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #00264d;
+    }
+
+    .account-switcher {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+
+    .account-btn {
+      background: #0059b3;
+      color: white;
+      border: 1px solid #66a3e0;
+      font-size: 10px;
+      padding: 2px 6px;
+      cursor: pointer;
+      border-radius: 2px;
+    }
+
+    .account-btn.active-acc {
+      background: #79ff4d;
+      color: black;
+      font-weight: bold;
+      border-color: #fff;
+    }
+
+    .mail-container {
+      display: flex;
+      flex: 1;
+      background: #ffffff;
+    }
+
+    .mail-sidebar {
+      width: 150px;
+      background-color: #f2f2f2;
+      border-right: 1px solid #cccccc;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .mail-compose-btn {
+      background: linear-gradient(180deg, #ff3333 0%, #cc0000 100%);
+      color: white;
+      border: 1px solid #800000;
+      font-size: 11px;
+      font-weight: bold;
+      padding: 6px;
+      width: 100%;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 1px 1px 0px #ff9999 inset;
+    }
+
+    .mail-folder-list {
+      list-style: none;
+      margin-top: 5px;
+    }
+
+    .mail-folder-list li {
+      font-size: 11px;
+      padding: 4px 6px;
+      cursor: pointer;
+      border-radius: 2px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2px;
+    }
+
+    .mail-folder-list li:hover {
+      background-color: #e6e6e6;
+    }
+
+    .mail-folder-list li.active-folder {
+      background-color: #0059b3;
+      color: white;
+      font-weight: bold;
+    }
+
+    .mail-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      background-color: #ffffff;
+      overflow-y: auto;
+    }
+
+    .mail-toolbar {
+      background: #eaeaea;
+      border: 1px solid #cccccc;
+      padding: 4px 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 11px;
+    }
+
+    .mail-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+
+    .mail-table th {
+      background-color: #e0e0e0;
+      border: 1px solid #cccccc;
+      padding: 4px 8px;
+      text-align: left;
+    }
+
+    .mail-table td {
+      border-bottom: 1px solid #eeeeee;
+      padding: 6px 8px;
+      cursor: pointer;
+    }
+
+    .mail-table tr:hover td {
+      background-color: #f5f5f5;
+    }
+
+    .unread-row {
+      font-weight: bold;
+      background-color: #f0f7ff;
+    }
+
+    .compose-form {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: #f9f9f9;
+      border: 1px solid #cccccc;
+      padding: 10px;
+    }
+
+    .compose-field {
+      display: flex;
+      align-items: center;
+      font-size: 11px;
+    }
+
+    .compose-field label {
+      width: 60px;
+      font-weight: bold;
+    }
+
+    .compose-field input {
+      flex: 1;
+      padding: 4px;
+      border: 1px solid #999;
+      font-size: 11px;
+    }
+
+    .compose-textarea {
+      width: 100%;
+      height: 180px;
+      padding: 6px;
+      border: 1px solid #999;
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+    }
+
+    .view-msg-box {
+      border: 1px solid #ccc;
+      background: #fafafa;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .msg-header-line {
+      font-size: 11px;
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 4px;
+    }
+
+    .msg-body-content {
+      font-size: 12px;
+      line-height: 1.4;
+      white-space: pre-wrap;
+      padding: 10px 0;
+      min-height: 120px;
+    }
   </style>
 </head>
 <body>
@@ -403,244 +634,465 @@
     
     <!-- Top Black Header -->
     <header class="top-header">
-      <a href="#" class="brand-logo-container">
+      <div class="brand-logo-container" onclick="showView('home')">
         <img src="greenbox-logo.png" alt="Greenbox Logo" class="brand-logo-img">
-      </a>
+      </div>
       <div class="header-links">
-        <a href="#">Home</a> | 
-        <a href="#">Map</a> | 
-        <a href="#">Index</a> | 
-        <a href="#">Search</a> | 
-        <a href="#">Purchase</a>
+        <a onclick="showView('home')">Home</a> | 
+        <a onclick="showView('home')">Map</a> | 
+        <a onclick="showView('home')">Index</a> | 
+        <a onclick="showView('home')">Search</a> | 
+        <a class="my-greenbox-link" onclick="showView('webmail')">★ My Greenbox</a>
       </div>
     </header>
 
     <!-- Navigation Menu -->
     <nav class="nav-bar">
-      <a href="#">News</a>
-      <a href="#">Products</a>
-      <a href="#">Solutions</a>
-      <a href="#">Studio</a>
-      <a href="#">Support &amp; Services</a>
-      <a href="#">About Greenbox</a>
+      <a onclick="showView('home')">News</a>
+      <a onclick="showView('home')">Products</a>
+      <a onclick="showView('home')">Solutions</a>
+      <a onclick="showView('home')">Studio</a>
+      <a onclick="showView('home')">Support &amp; Services</a>
+      <a onclick="showView('webmail')">My Greenbox Mail</a>
     </nav>
 
-    <!-- Main Content Grid -->
-    <main class="main-body">
-      
-      <!-- Left Navigation Column -->
-      <aside class="column left-col">
-        <div class="menu-group">
-          <h3>Fast Find</h3>
-          <ul>
-            <li><a href="#">Product Finder</a></li>
-            <li><a href="#">Buy Products</a></li>
-            <li><a href="#">Tryout Software</a></li>
-            <li><a href="#">Register Online</a></li>
-            <li><a href="#">Free Plug-ins &amp; Updates</a></li>
-            <li><a href="#">Support Databases</a></li>
-            <li><a href="#">User Forums</a></li>
-            <li><a href="#">Job Listings</a></li>
-          </ul>
-        </div>
-
-        <div class="menu-group">
-          <h3>News &amp; Features</h3>
-          <ul>
-            <li><a href="#">Tips</a></li>
-            <li><a href="#">Case Studies</a></li>
-            <li><a href="#">Gallery</a></li>
-            <li><a href="#">Columnists</a></li>
-            <li><a href="#">Events</a></li>
-            <li><a href="#">Press Releases</a></li>
-            <li><a href="#">Back Issues</a></li>
-          </ul>
-        </div>
-
-        <!-- USES SPEEDFRAME LOGO -->
-        <a href="#" class="get-player-badge">
-          <img src="speedframe-logo.png" alt="Get Speedframe Player">
-          <div class="badge-text">Get Speedframe Player 2.0</div>
-        </a>
-      </aside>
-
-      <!-- Main Showcase Column -->
-      <section class="column center-col">
+    <!-- VIEW 1: HOMEPAGE -->
+    <div id="homeView" class="page-view active">
+      <main class="main-body">
         
-        <!-- Product Spotlight Box - USES SPEEDFRAME LOGO -->
-        <div class="product-hero-box">
-          <div class="product-box-art">
-            <img src="speedframe-logo.png" alt="Speedframe Logo">
-            <div><strong>GREENBOX</strong><br>Speedframe<br><span style="font-size:8px; color:#666;">v2.0 Edition</span></div>
+        <!-- Left Navigation Column -->
+        <aside class="column left-col">
+          <div class="menu-group">
+            <h3>Fast Find</h3>
+            <ul>
+              <li><a href="#">Product Finder</a></li>
+              <li><a href="#">Buy Products</a></li>
+              <li><a href="#">Tryout Software</a></li>
+              <li><a href="#">Register Online</a></li>
+              <li><a href="#">Free Plug-ins</a></li>
+              <li><a href="#">Support Databases</a></li>
+              <li><a onclick="showView('webmail')">My Greenbox Mail</a></li>
+            </ul>
           </div>
-          <div class="product-info">
-            <h1>Greenbox Speedframe</h1>
-            <h2>Animation Power Made Easy</h2>
-            <p>With intuitive timeline controls, vector tweening, and high-speed compression features in <a href="#">Greenbox Speedframe Business Edition</a>, you can create first-rate interactive sales, web graphics, and animated marketing materials with minimal bandwidth.</p>
-            <a href="#" class="download-btn">Download Free Tryout (4.2 MB)</a>
+
+          <div class="menu-group">
+            <h3>News &amp; Features</h3>
+            <ul>
+              <li><a href="#">Tips</a></li>
+              <li><a href="#">Case Studies</a></li>
+              <li><a href="#">Gallery</a></li>
+              <li><a href="#">Columnists</a></li>
+              <li><a href="#">Events</a></li>
+            </ul>
           </div>
-        </div>
 
-        <!-- Live Preview Canvas -->
-        <div class="demo-container">
-          <div class="demo-title">LIVE DEMO: Greenbox Speedframe Engine Output</div>
-          <canvas id="speedframeCanvas" width="280" height="100"></canvas>
-          <div class="demo-caption">Rendered live at 30 FPS using Speedframe Web Player standard.</div>
-        </div>
+          <!-- Get Speedframe Badge -->
+          <a href="#" class="get-player-badge">
+            <img src="speedframe-logo.png" alt="Get Speedframe Player">
+            <div class="badge-text">Get Speedframe Player 2.0</div>
+          </a>
+        </aside>
 
-        <!-- News Article -->
-        <article class="article-section">
-          <h3>Speedframe Drives Web Animation Standards</h3>
-          <p>In a recent <a href="#">press release</a>, Greenbox announced its high-speed Web Animation Markup proposal to the World Wide Web Consortium (W3C) alongside IBM, Netscape, and Sun Microsystems. Read the <a href="#">Q&amp;A</a> for more technical information.</p>
-        </article>
-
-        <!-- Send Email / Feedback Form -->
-        <div class="contact-box">
-          <h3>Send Us Your Business Story</h3>
-          <p>Are you using Greenbox software to achieve key business goals? Tell your story directly to the Greenbox web team!</p>
-          <form onsubmit="alert('Thank you for contacting Greenbox!'); return false;">
-            <div class="form-group">
-              <label for="userName">Your Name:</label>
-              <input type="text" id="userName" placeholder="e.g. Jane Doe" required>
+        <!-- Main Showcase Column -->
+        <section class="column center-col">
+          
+          <!-- Product Spotlight Box -->
+          <div class="product-hero-box">
+            <div class="product-box-art">
+              <img src="speedframe-logo.png" alt="Speedframe Logo">
+              <div><strong>GREENBOX</strong><br>Speedframe<br><span style="font-size:8px; color:#666;">v2.0 Edition</span></div>
             </div>
-            <div class="form-group">
-              <label for="userEmail">Email Address:</label>
-              <input type="email" id="userEmail" placeholder="name@company.com" required>
+            <div class="product-info">
+              <h1>Greenbox Speedframe</h1>
+              <h2>Animation Power Made Easy</h2>
+              <p>With intuitive timeline controls, vector tweening, and high-speed compression features in <a href="#">Greenbox Speedframe Business Edition</a>, you can create interactive sales graphics with minimal bandwidth.</p>
+              <a href="#" class="download-btn">Download Free Tryout (4.2 MB)</a>
             </div>
-            <div class="form-group">
-              <label for="userMsg">Comments / Story:</label>
-              <textarea id="userMsg" rows="3" placeholder="Write your message here..."></textarea>
+          </div>
+
+          <!-- Live Preview Canvas -->
+          <div class="demo-container">
+            <div class="demo-title">LIVE DEMO: Greenbox Speedframe Engine Output</div>
+            <canvas id="speedframeCanvas" width="280" height="90"></canvas>
+            <div class="demo-caption">Rendered live at 30 FPS using Speedframe Web Player standard.</div>
+          </div>
+
+          <!-- Article -->
+          <article class="article-section">
+            <h3>Speedframe Drives Web Animation Standards</h3>
+            <p>In a recent <a href="#">press release</a>, Greenbox announced its Web Animation Markup proposal alongside IBM, Netscape, and Sun Microsystems.</p>
+          </article>
+
+          <!-- Contact / Email Submission Form -->
+          <div class="contact-box">
+            <h3>Send Us Your Business Story</h3>
+            <p>Are you using Greenbox software? Send a direct message to Greenbox Webmail!</p>
+            <form onsubmit="sendStoryToWebmail(event)">
+              <div class="form-group">
+                <label for="userName">Your Name / Email:</label>
+                <input type="text" id="userName" placeholder="e.g. jane@company.com" required>
+              </div>
+              <div class="form-group">
+                <label for="userMsg">Comments / Story:</label>
+                <textarea id="userMsg" rows="3" placeholder="Write your story here..." required></textarea>
+              </div>
+              <div class="btn-row">
+                <button type="submit" class="submit-btn">Send Message</button>
+                <button type="button" class="submit-btn" onclick="showView('webmail')" style="background:#ccffcc;">Open My Greenbox Mail</button>
+              </div>
+            </form>
+          </div>
+
+        </section>
+
+        <!-- Right Column Promos (Glossy 2000s Gel Orbs) -->
+        <aside class="column right-col">
+          <div class="site-select-box">
+            <select>
+              <option>Greenbox Sites</option>
+              <option>US / North America</option>
+              <option>Europe</option>
+            </select>
+            <button class="go-btn">Go!</button>
+          </div>
+
+          <div class="promo-card">
+            <svg class="promo-icon-svg" viewBox="0 0 40 40">
+              <defs>
+                <radialGradient id="redSphere" cx="35%" cy="30%" r="65%">
+                  <stop offset="0%" stop-color="#ff7777"/>
+                  <stop offset="50%" stop-color="#cc0000"/>
+                  <stop offset="100%" stop-color="#330000"/>
+                </radialGradient>
+                <linearGradient id="glossHighlight" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8"/>
+                  <stop offset="100%" stop-color="#ffffff" stop-opacity="0.0"/>
+                </linearGradient>
+              </defs>
+              <circle cx="20" cy="20" r="18" fill="url(#redSphere)"/>
+              <ellipse cx="20" cy="11" rx="12" ry="6" fill="url(#glossHighlight)"/>
+              <polygon points="22,8 11,21 19,21 17,32 28,17 20,17" fill="#ffff00"/>
+            </svg>
+            <div class="promo-text"><a href="#">Speedframe: Web Animation Hits High Gear</a></div>
+          </div>
+
+          <div class="promo-card">
+            <svg class="promo-icon-svg" viewBox="0 0 40 40">
+              <defs>
+                <radialGradient id="blueSphere" cx="35%" cy="30%" r="65%">
+                  <stop offset="0%" stop-color="#66ccff"/>
+                  <stop offset="50%" stop-color="#0066cc"/>
+                  <stop offset="100%" stop-color="#001133"/>
+                </radialGradient>
+              </defs>
+              <circle cx="20" cy="20" r="18" fill="url(#blueSphere)"/>
+              <ellipse cx="20" cy="11" rx="12" ry="6" fill="url(#glossHighlight)"/>
+              <polygon points="20,8 23.5,15 31,15.5 25,20.5 27,28 20,23.5 13,28 15,20.5 9,15.5 16.5,15" fill="#ffffff"/>
+            </svg>
+            <div class="promo-text"><a href="#">User Gallery: Animation Spotlight</a></div>
+          </div>
+
+          <div class="promo-card">
+            <svg class="promo-icon-svg" viewBox="0 0 40 40">
+              <defs>
+                <radialGradient id="greenSphere" cx="35%" cy="30%" r="65%">
+                  <stop offset="0%" stop-color="#88ff88"/>
+                  <stop offset="50%" stop-color="#00aa22"/>
+                  <stop offset="100%" stop-color="#002200"/>
+                </radialGradient>
+              </defs>
+              <circle cx="20" cy="20" r="18" fill="url(#greenSphere)"/>
+              <ellipse cx="20" cy="11" rx="12" ry="6" fill="url(#glossHighlight)"/>
+              <path d="M20,10 C14,10 10,14 10,20 C10,25 14,29 20,29 C22,29 23,27.5 23,26 C23,25 22.5,24 22,23.5 C21.5,23 21,22 21,21 C21,19.5 22.5,18 24,18 L26,18 C28,18 29,16 29,14 C28,11.5 24.5,10 20,10 Z" fill="#ffffff"/>
+            </svg>
+            <div class="promo-text"><a href="#">Gallery: Web Animation Maestro</a></div>
+          </div>
+
+          <div class="copyright">
+            Copyright &copy; 1998-2000 Greenbox Systems Incorporated.
+          </div>
+        </aside>
+
+      </main>
+    </div>
+
+    <!-- VIEW 2: MY GREENBOX WEBMAIL -->
+    <div id="webmailView" class="page-view">
+      <!-- Active Account Bar -->
+      <div class="mail-account-bar">
+        <div><strong>Active Account:</strong> <span id="currentAccountDisplay" style="color:#79ff4d;">alice@greenbox.com</span></div>
+        <div class="account-switcher">
+          <span>Switch User:</span>
+          <button class="account-btn active-acc" onclick="switchAccount('alice@greenbox.com')">Alice</button>
+          <button class="account-btn" onclick="switchAccount('bob@greenbox.com')">Bob</button>
+          <button class="account-btn" onclick="switchAccount('charlie@greenbox.com')">Charlie</button>
+          <button class="account-btn" onclick="switchAccount('support@greenbox.com')">Support</button>
+        </div>
+      </div>
+
+      <div class="mail-container">
+        <!-- Mail Sidebar -->
+        <div class="mail-sidebar">
+          <button class="mail-compose-btn" onclick="showMailSection('compose')">✏ COMPOSE MAIL</button>
+          <ul class="mail-folder-list">
+            <li id="folder-inbox" class="active-folder" onclick="showMailSection('inbox')">
+              <span>📥 Inbox</span> <span id="unreadCountBadge" style="font-size:9px;">(0)</span>
+            </li>
+            <li id="folder-sent" onclick="showMailSection('sent')">
+              <span>📤 Sent Items</span>
+            </li>
+          </ul>
+
+          <div style="margin-top:auto; font-size:10px; color:#666; border-top:1px solid #ccc; padding-top:6px;">
+            <strong>Quick Address Book</strong><br>
+            • alice@greenbox.com<br>
+            • bob@greenbox.com<br>
+            • charlie@greenbox.com<br>
+            • support@greenbox.com
+          </div>
+        </div>
+
+        <!-- Mail Main Area -->
+        <div class="mail-main">
+          
+          <!-- Inbox Section -->
+          <div id="mailSectionInbox">
+            <div class="mail-toolbar">
+              <strong>Inbox Folder</strong>
+              <button class="submit-btn" onclick="renderMailbox()">🔄 Refresh</button>
             </div>
-            <button type="submit" class="submit-btn">Send Email</button>
-          </form>
-        </div>
-
-      </section>
-
-      <!-- Right Column Promos & Links (GLOSSY 2000s GEL ORB ICONS) -->
-      <aside class="column right-col">
-        <div class="site-select-box">
-          <select>
-            <option>Greenbox Sites</option>
-            <option>US / North America</option>
-            <option>Europe</option>
-            <option>Asia Pacific</option>
-          </select>
-          <button class="go-btn">Go!</button>
-        </div>
-
-        <!-- Promo 1: Red Glossy Sphere + Lightning -->
-        <div class="promo-card">
-          <svg class="promo-icon-svg" viewBox="0 0 40 40">
-            <defs>
-              <radialGradient id="redSphere" cx="35%" cy="30%" r="65%">
-                <stop offset="0%" stop-color="#ff7777"/>
-                <stop offset="50%" stop-color="#cc0000"/>
-                <stop offset="85%" stop-color="#770000"/>
-                <stop offset="100%" stop-color="#330000"/>
-              </radialGradient>
-              <linearGradient id="glossHighlight" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8"/>
-                <stop offset="100%" stop-color="#ffffff" stop-opacity="0.0"/>
-              </linearGradient>
-            </defs>
-            <circle cx="20" cy="20" r="18" fill="url(#redSphere)" stroke="#550000" stroke-width="1"/>
-            <ellipse cx="20" cy="11" rx="12" ry="6" fill="url(#glossHighlight)"/>
-            <polygon points="22,8 11,21 19,21 17,32 28,17 20,17" fill="#ffff00" stroke="#ffaa00" stroke-width="0.5" filter="drop-shadow(0 1px 1px rgba(0,0,0,0.5))"/>
-          </svg>
-          <div class="promo-text">
-            <a href="#">Speedframe: Web Animation Hits High Gear</a>
+            <table class="mail-table">
+              <thead>
+                <tr>
+                  <th>From</th>
+                  <th>Subject</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody id="inboxTableBody">
+                <tr><td colspan="3" style="text-align:center; color:#888;">No messages found.</td></tr>
+              </tbody>
+            </table>
           </div>
-        </div>
 
-        <!-- Promo 2: Blue Glossy Sphere + Star -->
-        <div class="promo-card">
-          <svg class="promo-icon-svg" viewBox="0 0 40 40">
-            <defs>
-              <radialGradient id="blueSphere" cx="35%" cy="30%" r="65%">
-                <stop offset="0%" stop-color="#66ccff"/>
-                <stop offset="50%" stop-color="#0066cc"/>
-                <stop offset="85%" stop-color="#003377"/>
-                <stop offset="100%" stop-color="#001133"/>
-              </radialGradient>
-            </defs>
-            <circle cx="20" cy="20" r="18" fill="url(#blueSphere)" stroke="#002255" stroke-width="1"/>
-            <ellipse cx="20" cy="11" rx="12" ry="6" fill="url(#glossHighlight)"/>
-            <polygon points="20,8 23.5,15 31,15.5 25,20.5 27,28 20,23.5 13,28 15,20.5 9,15.5 16.5,15" fill="#ffffff" filter="drop-shadow(0 1px 1px rgba(0,0,0,0.5))"/>
-          </svg>
-          <div class="promo-text">
-            <a href="#">User Gallery: Animation Spotlight</a>
+          <!-- Sent Items Section -->
+          <div id="mailSectionSent" style="display:none;">
+            <div class="mail-toolbar">
+              <strong>Sent Items</strong>
+            </div>
+            <table class="mail-table">
+              <thead>
+                <tr>
+                  <th>To</th>
+                  <th>Subject</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody id="sentTableBody">
+                <tr><td colspan="3" style="text-align:center; color:#888;">No sent messages.</td></tr>
+              </tbody>
+            </table>
           </div>
-        </div>
 
-        <!-- Promo 3: Green Glossy Sphere + Palette -->
-        <div class="promo-card">
-          <svg class="promo-icon-svg" viewBox="0 0 40 40">
-            <defs>
-              <radialGradient id="greenSphere" cx="35%" cy="30%" r="65%">
-                <stop offset="0%" stop-color="#88ff88"/>
-                <stop offset="50%" stop-color="#00aa22"/>
-                <stop offset="85%" stop-color="#005511"/>
-                <stop offset="100%" stop-color="#002200"/>
-              </radialGradient>
-            </defs>
-            <circle cx="20" cy="20" r="18" fill="url(#greenSphere)" stroke="#003300" stroke-width="1"/>
-            <ellipse cx="20" cy="11" rx="12" ry="6" fill="url(#glossHighlight)"/>
-            <path d="M20,10 C14,10 10,14 10,20 C10,25 14,29 20,29 C22,29 23,27.5 23,26 C23,25 22.5,24 22,23.5 C21.5,23 21,22 21,21 C21,19.5 22.5,18 24,18 L26,18 C28,18 29,16 29,14 C28,11.5 24.5,10 20,10 Z" fill="#ffffff" filter="drop-shadow(0 1px 1px rgba(0,0,0,0.5))"/>
-            <circle cx="14" cy="16" r="1.5" fill="#ff0000"/>
-            <circle cx="19" cy="14" r="1.5" fill="#ffcc00"/>
-            <circle cx="24" cy="15" r="1.5" fill="#0066ff"/>
-          </svg>
-          <div class="promo-text">
-            <a href="#">Gallery: Web Animation Maestro</a>
+          <!-- Compose Section -->
+          <div id="mailSectionCompose" style="display:none;">
+            <div class="mail-toolbar">
+              <strong>New Message</strong>
+            </div>
+            <form class="compose-form" onsubmit="handleSendMail(event)">
+              <div class="compose-field">
+                <label>To:</label>
+                <input type="email" id="composeTo" placeholder="recipient@greenbox.com" required>
+              </div>
+              <div class="compose-field">
+                <label>Subject:</label>
+                <input type="text" id="composeSubject" placeholder="Enter subject line..." required>
+              </div>
+              <textarea class="compose-textarea" id="composeBody" placeholder="Type your email message here..." required></textarea>
+              <div>
+                <button type="submit" class="submit-btn" style="background:#ccffcc;">🚀 Send Email</button>
+                <button type="button" class="submit-btn" onclick="showMailSection('inbox')">Cancel</button>
+              </div>
+            </form>
           </div>
-        </div>
 
-        <!-- Promo 4: Orange Glossy Sphere + Chart -->
-        <div class="promo-card">
-          <svg class="promo-icon-svg" viewBox="0 0 40 40">
-            <defs>
-              <radialGradient id="orangeSphere" cx="35%" cy="30%" r="65%">
-                <stop offset="0%" stop-color="#ffcc66"/>
-                <stop offset="50%" stop-color="#ff8800"/>
-                <stop offset="85%" stop-color="#aa4400"/>
-                <stop offset="100%" stop-color="#441100"/>
-              </radialGradient>
-            </defs>
-            <circle cx="20" cy="20" r="18" fill="url(#orangeSphere)" stroke="#441100" stroke-width="1"/>
-            <ellipse cx="20" cy="11" rx="12" ry="6" fill="url(#glossHighlight)"/>
-            <g fill="#ffffff" filter="drop-shadow(0 1px 1px rgba(0,0,0,0.5))">
-              <rect x="11" y="22" width="4" height="8" rx="1"/>
-              <rect x="18" y="17" width="4" height="13" rx="1"/>
-              <rect x="25" y="12" width="4" height="18" rx="1"/>
-            </g>
-          </svg>
-          <div class="promo-text">
-            <a href="#">Smart, Simple Site Statistics</a>
+          <!-- View Single Message Section -->
+          <div id="mailSectionView" style="display:none;">
+            <div class="mail-toolbar">
+              <button class="submit-btn" onclick="showMailSection('inbox')">⬅ Back to Inbox</button>
+              <button class="submit-btn" id="replyBtn">↩ Reply</button>
+            </div>
+            <div class="view-msg-box">
+              <div class="msg-header-line"><strong>From:</strong> <span id="viewFrom"></span></div>
+              <div class="msg-header-line"><strong>To:</strong> <span id="viewTo"></span></div>
+              <div class="msg-header-line"><strong>Subject:</strong> <span id="viewSubject"></span></div>
+              <div class="msg-header-line"><strong>Date:</strong> <span id="viewDate"></span></div>
+              <div class="msg-body-content" id="viewBody"></div>
+            </div>
           </div>
-        </div>
 
-        <div class="copyright">
-          Copyright &copy; 1998-2000 Greenbox Systems Incorporated. All rights reserved.
         </div>
-      </aside>
-
-    </main>
+      </div>
+    </div>
 
   </div>
 
   <script>
+    // Local In-Memory Email Data Store
+    let currentAccount = 'alice@greenbox.com';
+    let localEmails = [
+      {
+        id: '1',
+        from: 'support@greenbox.com',
+        to: 'alice@greenbox.com',
+        subject: 'Welcome to My Greenbox Webmail!',
+        body: 'Welcome to Greenbox Webmail 2.0!\n\nYou can send real-time emails to any email address using this interface.',
+        date: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+      }
+    ];
+
+    // Page View Navigation
+    function showView(viewName) {
+      document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
+      if(viewName === 'home') {
+        document.getElementById('homeView').classList.add('active');
+      } else {
+        document.getElementById('webmailView').classList.add('active');
+        renderMailbox();
+      }
+    }
+
+    // Switch Account
+    function switchAccount(email) {
+      currentAccount = email;
+      document.getElementById('currentAccountDisplay').innerText = email;
+      document.querySelectorAll('.account-btn').forEach(btn => {
+        btn.classList.toggle('active-acc', btn.innerText.toLowerCase().includes(email.split('@')[0]));
+      });
+      renderMailbox();
+    }
+
+    // Switch Mail Sections
+    function showMailSection(section) {
+      document.getElementById('mailSectionInbox').style.display = section === 'inbox' ? 'block' : 'none';
+      document.getElementById('mailSectionSent').style.display = section === 'sent' ? 'block' : 'none';
+      document.getElementById('mailSectionCompose').style.display = section === 'compose' ? 'block' : 'none';
+      document.getElementById('mailSectionView').style.display = section === 'view' ? 'block' : 'none';
+
+      document.getElementById('folder-inbox').classList.toggle('active-folder', section === 'inbox');
+      document.getElementById('folder-sent').classList.toggle('active-folder', section === 'sent');
+    }
+
+    // Render Mailbox
+    function renderMailbox() {
+      const inbox = localEmails.filter(m => m.to.toLowerCase() === currentAccount.toLowerCase());
+      const sent = localEmails.filter(m => m.from.toLowerCase() === currentAccount.toLowerCase());
+
+      document.getElementById('unreadCountBadge').innerText = `(${inbox.length})`;
+
+      // Render Inbox
+      const inboxBody = document.getElementById('inboxTableBody');
+      if (inbox.length === 0) {
+        inboxBody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#888;">No messages found in Inbox.</td></tr>`;
+      } else {
+        inboxBody.innerHTML = inbox.map(m => `
+          <tr onclick="readMessage('${m.id}')" class="unread-row">
+            <td>${m.from}</td>
+            <td>${m.subject}</td>
+            <td>${m.date}</td>
+          </tr>
+        `).join('');
+      }
+
+      // Render Sent
+      const sentBody = document.getElementById('sentTableBody');
+      if (sent.length === 0) {
+        sentBody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#888;">No sent messages.</td></tr>`;
+      } else {
+        sentBody.innerHTML = sent.map(m => `
+          <tr onclick="readMessage('${m.id}')">
+            <td>${m.to}</td>
+            <td>${m.subject}</td>
+            <td>${m.date}</td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    // Read Message
+    function readMessage(msgId) {
+      const msg = localEmails.find(m => m.id === msgId);
+      if(!msg) return;
+
+      document.getElementById('viewFrom').innerText = msg.from;
+      document.getElementById('viewTo').innerText = msg.to;
+      document.getElementById('viewSubject').innerText = msg.subject;
+      document.getElementById('viewDate').innerText = msg.date;
+      document.getElementById('viewBody').innerText = msg.body;
+
+      document.getElementById('replyBtn').onclick = () => {
+        showMailSection('compose');
+        document.getElementById('composeTo').value = msg.from;
+        document.getElementById('composeSubject').value = msg.subject.startsWith('Re:') ? msg.subject : `Re: ${msg.subject}`;
+      };
+
+      showMailSection('view');
+    }
+
+    // Handle Send Email
+    function handleSendMail(e) {
+      e.preventDefault();
+      const to = document.getElementById('composeTo').value;
+      const subject = document.getElementById('composeSubject').value;
+      const body = document.getElementById('composeBody').value;
+
+      localEmails.push({
+        id: Date.now().toString(),
+        from: currentAccount,
+        to: to,
+        subject: subject,
+        body: body,
+        date: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+      });
+
+      document.getElementById('composeTo').value = '';
+      document.getElementById('composeSubject').value = '';
+      document.getElementById('composeBody').value = '';
+
+      alert('Email sent successfully!');
+      showMailSection('inbox');
+      renderMailbox();
+    }
+
+    // Send Story from Home Page to Webmail
+    function sendStoryToWebmail(e) {
+      e.preventDefault();
+      const user = document.getElementById('userName').value;
+      const story = document.getElementById('userMsg').value;
+
+      localEmails.push({
+        id: Date.now().toString(),
+        from: user.includes('@') ? user : `${user.replace(/\s+/g,'').toLowerCase()}@company.com`,
+        to: 'support@greenbox.com',
+        subject: `Business Story Submission from ${user}`,
+        body: story,
+        date: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+      });
+
+      document.getElementById('userName').value = '';
+      document.getElementById('userMsg').value = '';
+
+      alert('Your message was sent to Greenbox Webmail!');
+      switchAccount('support@greenbox.com');
+      showView('webmail');
+    }
+
+    // Speedframe Canvas Animation
     const canvas = document.getElementById('speedframeCanvas');
     const ctx = canvas.getContext('2d');
+    let rectX = 110, rectY = 30, dx = 2, dy = 1.5, starAngle = 0;
 
-    let rectX = 110;
-    let rectY = 35;
-    let dx = 2;
-    let dy = 1.5;
-
-    let starAngle = 0;
-
-    function animate() {
+    function animateCanvas() {
       ctx.fillStyle = '#000000';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -655,37 +1107,21 @@
 
       ctx.fillStyle = '#ffffff';
       ctx.font = 'bold 10px monospace';
-      ctx.fillText('SPEEDFRAME', 105, 18);
+      ctx.fillText('SPEEDFRAME', 105, 16);
 
       ctx.fillStyle = '#00FF00';
-      ctx.fillRect(rectX, rectY, 28, 28);
+      ctx.fillRect(rectX, rectY, 24, 24);
       ctx.strokeStyle = '#FFFFFF';
-      ctx.strokeRect(rectX, rectY, 28, 28);
+      ctx.strokeRect(rectX, rectY, 24, 24);
 
-      rectX += dx;
-      rectY += dy;
-
-      if (rectX + 28 > canvas.width - 20 || rectX < 20) dx = -dx;
-      if (rectY + 28 > canvas.height - 15 || rectY < 25) dy = -dy;
-
-      ctx.save();
-      ctx.translate(210, 55);
-      ctx.rotate(starAngle);
-      ctx.strokeStyle = '#FFFF00';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(-12, 0); ctx.lineTo(12, 0);
-      ctx.moveTo(0, -12); ctx.lineTo(0, 12);
-      ctx.stroke();
-      ctx.restore();
+      rectX += dx; rectY += dy;
+      if (rectX + 24 > canvas.width - 15 || rectX < 15) dx = -dx;
+      if (rectY + 24 > canvas.height - 10 || rectY < 20) dy = -dy;
 
       starAngle += 0.05;
-
-      requestAnimationFrame(animate);
+      requestAnimationFrame(animateCanvas);
     }
-
-    animate();
+    animateCanvas();
   </script>
-
 </body>
 </html>
