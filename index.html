@@ -11,16 +11,10 @@
   <link rel="shortcut icon" href="./greenbox-favicon.png">
   <link rel="apple-touch-icon" href="./greenbox-favicon.png">
 
-  <!-- Firebase SDKs for Realtime Cloud Sync -->
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-
-  <!-- EmailJS SDK for Real Email Delivery -->
+  <!-- EmailJS SDK -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script type="text/javascript">
     (function(){
-       // Initialized with your EmailJS Public Key
        emailjs.init("DNiALElk6s1apj4Gx");
     })();
   </script>
@@ -457,27 +451,24 @@
       border-bottom: 1px solid #00264d;
     }
 
-    .account-switcher {
+    .account-auth-btns {
       display: flex;
-      gap: 5px;
-      align-items: center;
+      gap: 6px;
     }
 
-    .account-btn {
-      background: #0059b3;
+    .auth-btn {
+      background: #008000;
       color: white;
-      border: 1px solid #66a3e0;
+      border: 1px solid #00ff00;
       font-size: 10px;
-      padding: 2px 6px;
+      padding: 2px 8px;
       cursor: pointer;
-      border-radius: 2px;
+      font-weight: bold;
     }
 
-    .account-btn.active-acc {
-      background: #79ff4d;
-      color: black;
-      font-weight: bold;
-      border-color: #fff;
+    .auth-btn.logout {
+      background: #b30000;
+      border-color: #ff6666;
     }
 
     .mail-container {
@@ -487,7 +478,7 @@
     }
 
     .mail-sidebar {
-      width: 150px;
+      width: 160px;
       background-color: #f2f2f2;
       border-right: 1px solid #cccccc;
       padding: 10px;
@@ -583,13 +574,15 @@
       background-color: #f0f7ff;
     }
 
-    .compose-form {
+    .compose-form, .auth-form-box {
       display: flex;
       flex-direction: column;
       gap: 8px;
       background: #f9f9f9;
       border: 1px solid #cccccc;
-      padding: 10px;
+      padding: 12px;
+      max-width: 400px;
+      margin: 20px auto;
     }
 
     .compose-field {
@@ -599,7 +592,7 @@
     }
 
     .compose-field label {
-      width: 60px;
+      width: 80px;
       font-weight: bold;
     }
 
@@ -786,38 +779,6 @@
             <div class="promo-text"><a href="#">Speedframe: Web Animation Hits High Gear</a></div>
           </div>
 
-          <div class="promo-card">
-            <svg class="promo-icon-svg" viewBox="0 0 40 40">
-              <defs>
-                <radialGradient id="blueSphere" cx="35%" cy="30%" r="65%">
-                  <stop offset="0%" stop-color="#66ccff"/>
-                  <stop offset="50%" stop-color="#0066cc"/>
-                  <stop offset="100%" stop-color="#001133"/>
-                </radialGradient>
-              </defs>
-              <circle cx="20" cy="20" r="18" fill="url(#blueSphere)"/>
-              <ellipse cx="20" cy="11" rx="12" ry="6" fill="url(#glossHighlight)"/>
-              <polygon points="20,8 23.5,15 31,15.5 25,20.5 27,28 20,23.5 13,28 15,20.5 9,15.5 16.5,15" fill="#ffffff"/>
-            </svg>
-            <div class="promo-text"><a href="#">User Gallery: Animation Spotlight</a></div>
-          </div>
-
-          <div class="promo-card">
-            <svg class="promo-icon-svg" viewBox="0 0 40 40">
-              <defs>
-                <radialGradient id="greenSphere" cx="35%" cy="30%" r="65%">
-                  <stop offset="0%" stop-color="#88ff88"/>
-                  <stop offset="50%" stop-color="#00aa22"/>
-                  <stop offset="100%" stop-color="#002200"/>
-                </radialGradient>
-              </defs>
-              <circle cx="20" cy="20" r="18" fill="url(#greenSphere)"/>
-              <ellipse cx="20" cy="11" rx="12" ry="6" fill="url(#glossHighlight)"/>
-              <path d="M20,10 C14,10 10,14 10,20 C10,25 14,29 20,29 C22,29 23,27.5 23,26 C23,25 22.5,24 22,23.5 C21.5,23 21,22 21,21 C21,19.5 22.5,18 24,18 L26,18 C28,18 29,16 29,14 C28,11.5 24.5,10 20,10 Z" fill="#ffffff"/>
-            </svg>
-            <div class="promo-text"><a href="#">Gallery: Web Animation Maestro</a></div>
-          </div>
-
           <div class="copyright">
             Copyright &copy; 1998-2000 Greenbox Systems Incorporated.
           </div>
@@ -826,22 +787,19 @@
       </main>
     </div>
 
-    <!-- VIEW 2: MY GREENBOX WEBMAIL -->
+    <!-- VIEW 2: MY GREENBOX WEBMAIL WITH AUTH -->
     <div id="webmailView" class="page-view">
       <div class="mail-account-bar">
-        <div><strong>Active Account:</strong> <span id="currentAccountDisplay" style="color:#79ff4d;">alice@greenbox.com</span></div>
-        <div class="account-switcher">
-          <span>Switch User:</span>
-          <button class="account-btn active-acc" onclick="switchAccount('alice@greenbox.com')">Alice</button>
-          <button class="account-btn" onclick="switchAccount('bob@greenbox.com')">Bob</button>
-          <button class="account-btn" onclick="switchAccount('charlie@greenbox.com')">Charlie</button>
-          <button class="account-btn" onclick="switchAccount('support@greenbox.com')">Support</button>
+        <div><strong>Active Account:</strong> <span id="currentAccountDisplay" style="color:#79ff4d;">Guest (Not Logged In)</span></div>
+        <div class="account-auth-btns" id="authNavBtns">
+          <button class="auth-btn" onclick="showMailSection('login')">🔑 Sign In</button>
+          <button class="auth-btn" onclick="showMailSection('register')" style="background:#0059b3;">✨ Create Account</button>
         </div>
       </div>
 
       <div class="mail-container">
         <div class="mail-sidebar">
-          <button class="mail-compose-btn" onclick="showMailSection('compose')">✏ COMPOSE MAIL</button>
+          <button class="mail-compose-btn" onclick="checkAuthAndCompose()">✏ COMPOSE MAIL</button>
           <ul class="mail-folder-list">
             <li id="folder-inbox" class="active-folder" onclick="showMailSection('inbox')">
               <span>📥 Inbox</span> <span id="unreadCountBadge" style="font-size:9px;">(0)</span>
@@ -852,16 +810,15 @@
           </ul>
 
           <div style="margin-top:auto; font-size:10px; color:#666; border-top:1px solid #ccc; padding-top:6px;">
-            <strong>Quick Address Book</strong><br>
-            • alice@greenbox.com<br>
-            • bob@greenbox.com<br>
-            • charlie@greenbox.com<br>
-            • support@greenbox.com
+            <strong>System Status</strong><br>
+            • Greenbox Mail Server: Online<br>
+            • Encryption: 128-bit SSL
           </div>
         </div>
 
         <div class="mail-main">
           
+          <!-- INBOX -->
           <div id="mailSectionInbox">
             <div class="mail-toolbar">
               <strong>Inbox Folder</strong>
@@ -876,11 +833,12 @@
                 </tr>
               </thead>
               <tbody id="inboxTableBody">
-                <tr><td colspan="3" style="text-align:center; color:#888;">No messages found.</td></tr>
+                <tr><td colspan="3" style="text-align:center; color:#888;">Please login to view inbox.</td></tr>
               </tbody>
             </table>
           </div>
 
+          <!-- SENT -->
           <div id="mailSectionSent" style="display:none;">
             <div class="mail-toolbar">
               <strong>Sent Items</strong>
@@ -899,6 +857,49 @@
             </table>
           </div>
 
+          <!-- LOGIN FORM -->
+          <div id="mailSectionLogin" style="display:none;">
+            <form class="auth-form-box" onsubmit="handleUserLogin(event)">
+              <h3 style="border-bottom: 1px solid #ccc; padding-bottom: 4px;">Sign In to Greenbox Webmail</h3>
+              <div class="compose-field">
+                <label>Email:</label>
+                <input type="email" id="loginEmail" placeholder="username@greenbox.com" required>
+              </div>
+              <div class="compose-field">
+                <label>Password:</label>
+                <input type="password" id="loginPassword" placeholder="••••••••" required>
+              </div>
+              <div>
+                <button type="submit" class="submit-btn" style="background:#ccffcc;">🔑 Sign In</button>
+                <button type="button" class="submit-btn" onclick="showMailSection('register')">Create Account</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- REGISTER FORM -->
+          <div id="mailSectionRegister" style="display:none;">
+            <form class="auth-form-box" onsubmit="handleUserRegister(event)">
+              <h3 style="border-bottom: 1px solid #ccc; padding-bottom: 4px;">Create New Greenbox Account</h3>
+              <div class="compose-field">
+                <label>Username:</label>
+                <input type="text" id="regUsername" placeholder="e.g. john" required>
+              </div>
+              <div class="compose-field">
+                <label>Email Address:</label>
+                <input type="email" id="regEmail" placeholder="john@greenbox.com" required readonly style="background:#eee;">
+              </div>
+              <div class="compose-field">
+                <label>Password:</label>
+                <input type="password" id="regPassword" placeholder="••••••••" required>
+              </div>
+              <div>
+                <button type="submit" class="submit-btn" style="background:#79ff4d;">✨ Register Account</button>
+                <button type="button" class="submit-btn" onclick="showMailSection('login')">Back to Login</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- COMPOSE -->
           <div id="mailSectionCompose" style="display:none;">
             <div class="mail-toolbar">
               <strong>New Message</strong>
@@ -920,6 +921,7 @@
             </form>
           </div>
 
+          <!-- VIEW MSG -->
           <div id="mailSectionView" style="display:none;">
             <div class="mail-toolbar">
               <button class="submit-btn" onclick="showMailSection('inbox')">⬅ Back to Inbox</button>
@@ -941,17 +943,27 @@
   </div>
 
   <script>
-    let currentAccount = 'alice@greenbox.com';
-    let localEmails = [
+    let currentAccount = null;
+    let registeredUsers = JSON.parse(localStorage.getItem('gb_users')) || [
+      { email: 'alice@greenbox.com', pass: 'password' },
+      { email: 'bob@greenbox.com', pass: 'password' }
+    ];
+
+    let localEmails = JSON.parse(localStorage.getItem('gb_emails')) || [
       {
         id: '1',
         from: 'support@greenbox.com',
         to: 'alice@greenbox.com',
         subject: 'Welcome to My Greenbox Webmail!',
-        body: 'Welcome to Greenbox Webmail 2.0!\n\nYou can send real-time emails to any email address using this interface.',
+        body: 'Welcome to Greenbox Webmail 2.0!\n\nYou can create user accounts and send messages across the system.',
         date: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
       }
     ];
+
+    document.getElementById('regUsername').addEventListener('input', function(e) {
+      const clean = e.target.value.toLowerCase().replace(/[^a-z0-9]/g, '');
+      document.getElementById('regEmail').value = clean ? `${clean}@greenbox.com` : '';
+    });
 
     function showView(viewName) {
       document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
@@ -959,17 +971,71 @@
         document.getElementById('homeView').classList.add('active');
       } else {
         document.getElementById('webmailView').classList.add('active');
-        renderMailbox();
+        if (!currentAccount) {
+          showMailSection('login');
+        } else {
+          renderMailbox();
+        }
       }
     }
 
-    function switchAccount(email) {
+    function handleUserRegister(e) {
+      e.preventDefault();
+      const email = document.getElementById('regEmail').value;
+      const pass = document.getElementById('regPassword').value;
+
+      if(registeredUsers.find(u => u.email === email)) {
+        alert('An account with this email already exists!');
+        return;
+      }
+
+      registeredUsers.push({ email, pass });
+      localStorage.setItem('gb_users', JSON.stringify(registeredUsers));
+      
+      alert('Account created successfully! Logging you in...');
+      loginUser(email);
+    }
+
+    function handleUserLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const pass = document.getElementById('loginPassword').value;
+
+      const user = registeredUsers.find(u => u.email === email && u.pass === pass);
+      if(user) {
+        loginUser(email);
+      } else {
+        alert('Invalid email or password.');
+      }
+    }
+
+    function loginUser(email) {
       currentAccount = email;
       document.getElementById('currentAccountDisplay').innerText = email;
-      document.querySelectorAll('.account-btn').forEach(btn => {
-        btn.classList.toggle('active-acc', btn.innerText.toLowerCase().includes(email.split('@')[0]));
-      });
+      document.getElementById('authNavBtns').innerHTML = `
+        <button class="auth-btn logout" onclick="logoutUser()">🚪 Log Out</button>
+      `;
+      showMailSection('inbox');
       renderMailbox();
+    }
+
+    function logoutUser() {
+      currentAccount = null;
+      document.getElementById('currentAccountDisplay').innerText = 'Guest (Not Logged In)';
+      document.getElementById('authNavBtns').innerHTML = `
+        <button class="auth-btn" onclick="showMailSection('login')">🔑 Sign In</button>
+        <button class="auth-btn" onclick="showMailSection('register')" style="background:#0059b3;">✨ Create Account</button>
+      `;
+      showMailSection('login');
+    }
+
+    function checkAuthAndCompose() {
+      if(!currentAccount) {
+        alert('Please log in or create an account first!');
+        showMailSection('login');
+      } else {
+        showMailSection('compose');
+      }
     }
 
     function showMailSection(section) {
@@ -977,12 +1043,16 @@
       document.getElementById('mailSectionSent').style.display = section === 'sent' ? 'block' : 'none';
       document.getElementById('mailSectionCompose').style.display = section === 'compose' ? 'block' : 'none';
       document.getElementById('mailSectionView').style.display = section === 'view' ? 'block' : 'none';
+      document.getElementById('mailSectionLogin').style.display = section === 'login' ? 'block' : 'none';
+      document.getElementById('mailSectionRegister').style.display = section === 'register' ? 'block' : 'none';
 
       document.getElementById('folder-inbox').classList.toggle('active-folder', section === 'inbox');
       document.getElementById('folder-sent').classList.toggle('active-folder', section === 'sent');
     }
 
     function renderMailbox() {
+      if(!currentAccount) return;
+
       const inbox = localEmails.filter(m => m.to.toLowerCase() === currentAccount.toLowerCase());
       const sent = localEmails.filter(m => m.from.toLowerCase() === currentAccount.toLowerCase());
 
@@ -1034,7 +1104,6 @@
       showMailSection('view');
     }
 
-    // Handle Send Email using Service ID and Template ID
     function handleSendMail(e) {
       e.preventDefault();
       
@@ -1042,7 +1111,6 @@
       const subject = document.getElementById('composeSubject').value;
       const body = document.getElementById('composeBody').value;
 
-      // Save locally to retro webmail view
       localEmails.push({
         id: Date.now().toString(),
         from: currentAccount,
@@ -1052,7 +1120,8 @@
         date: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
       });
 
-      // Send via EmailJS with your service & template IDs
+      localStorage.setItem('gb_emails', JSON.stringify(localEmails));
+
       const templateParams = {
         to_email: to,
         from_email: currentAccount,
@@ -1060,14 +1129,7 @@
         message: body
       };
 
-      emailjs.send('service_7mvyfpe', 'template_zn6uumu', templateParams)
-        .then(function(response) {
-           console.log('SUCCESS!', response.status, response.text);
-           alert('Email delivered to real inbox successfully!');
-        }, function(error) {
-           console.log('FAILED...', error);
-           alert('Failed to deliver real email. Please check your EmailJS dashboard settings.');
-        });
+      emailjs.send('service_7mvyfpe', 'template_zn6uumu', templateParams);
 
       document.getElementById('composeTo').value = '';
       document.getElementById('composeSubject').value = '';
@@ -1091,17 +1153,18 @@
         date: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
       });
 
+      localStorage.setItem('gb_emails', JSON.stringify(localEmails));
+
       document.getElementById('userName').value = '';
       document.getElementById('userMsg').value = '';
 
       alert('Your message was sent to Greenbox Webmail!');
-      switchAccount('support@greenbox.com');
       showView('webmail');
     }
 
     const canvas = document.getElementById('speedframeCanvas');
     const ctx = canvas.getContext('2d');
-    let rectX = 110, rectY = 30, dx = 2, dy = 1.5, starAngle = 0;
+    let rectX = 110, rectY = 30, dx = 2, dy = 1.5;
 
     function animateCanvas() {
       ctx.fillStyle = '#000000';
@@ -1129,7 +1192,6 @@
       if (rectX + 24 > canvas.width - 15 || rectX < 15) dx = -dx;
       if (rectY + 24 > canvas.height - 10 || rectY < 20) dy = -dy;
 
-      starAngle += 0.05;
       requestAnimationFrame(animateCanvas);
     }
     animateCanvas();
