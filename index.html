@@ -5,8 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Greenbox Systems</title>
   
-  <!-- Browser Tab Favicon -->
-  <link rel="icon" type="image/png" href="greenbox-favicon.png">
+  <!-- Browser Tab & Safari Favicon Links -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./greenbox-favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./greenbox-favicon.png">
+  <link rel="shortcut icon" href="./greenbox-favicon.png">
+  <link rel="apple-touch-icon" href="./greenbox-favicon.png">
 
   <!-- Firebase SDKs for Realtime Cloud Sync -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -1110,7 +1113,7 @@
         ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, canvas.height); ctx.stroke();
       }
       for (let j = 0; j < canvas.height; j += 20) {
-        ctx.beginPath(); ctx.moveTo(0, j); ctx.lineTo(canvas.width, j); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(0, j); ctx.lineTo(canvas.height); ctx.stroke();
       }
 
       ctx.fillStyle = '#ffffff';
