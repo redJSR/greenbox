@@ -14,8 +14,8 @@
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script type="text/javascript">
     (function(){
-       // Replace with your EmailJS Public Key
-       emailjs.init("YOUR_PUBLIC_KEY");
+       // Initialized with your EmailJS Public Key
+       emailjs.init("DNiALElk6s1apj4Gx");
     })();
   </script>
 
@@ -362,7 +362,7 @@
       background: #eee;
     }
 
-    /* 2000s Right Sidebar Gel Orb Promos */
+    /* Right Sidebar Promos */
     .site-select-box {
       display: flex;
       gap: 4px;
@@ -695,7 +695,6 @@
             </ul>
           </div>
 
-          <!-- Get Speedframe Badge -->
           <a href="#" class="get-player-badge">
             <img src="speedframe-logo.png" alt="Get Speedframe Player">
             <div class="badge-text">Get Speedframe Player 2.0</div>
@@ -705,7 +704,6 @@
         <!-- Main Showcase Column -->
         <section class="column center-col">
           
-          <!-- Product Spotlight Box -->
           <div class="product-hero-box">
             <div class="product-box-art">
               <img src="speedframe-logo.png" alt="Speedframe Logo">
@@ -719,20 +717,17 @@
             </div>
           </div>
 
-          <!-- Live Preview Canvas -->
           <div class="demo-container">
             <div class="demo-title">LIVE DEMO: Greenbox Speedframe Engine Output</div>
             <canvas id="speedframeCanvas" width="280" height="90"></canvas>
             <div class="demo-caption">Rendered live at 30 FPS using Speedframe Web Player standard.</div>
           </div>
 
-          <!-- Article -->
           <article class="article-section">
             <h3>Speedframe Drives Web Animation Standards</h3>
             <p>In a recent <a href="#">press release</a>, Greenbox announced its Web Animation Markup proposal alongside IBM, Netscape, and Sun Microsystems.</p>
           </article>
 
-          <!-- Contact / Email Submission Form -->
           <div class="contact-box">
             <h3>Send Us Your Business Story</h3>
             <p>Are you using Greenbox software? Send a direct message to Greenbox Webmail!</p>
@@ -754,7 +749,7 @@
 
         </section>
 
-        <!-- Right Column Promos (Glossy 2000s Gel Orbs) -->
+        <!-- Right Column Promos -->
         <aside class="column right-col">
           <div class="site-select-box">
             <select>
@@ -827,7 +822,6 @@
 
     <!-- VIEW 2: MY GREENBOX WEBMAIL -->
     <div id="webmailView" class="page-view">
-      <!-- Active Account Bar -->
       <div class="mail-account-bar">
         <div><strong>Active Account:</strong> <span id="currentAccountDisplay" style="color:#79ff4d;">alice@greenbox.com</span></div>
         <div class="account-switcher">
@@ -840,7 +834,6 @@
       </div>
 
       <div class="mail-container">
-        <!-- Mail Sidebar -->
         <div class="mail-sidebar">
           <button class="mail-compose-btn" onclick="showMailSection('compose')">✏ COMPOSE MAIL</button>
           <ul class="mail-folder-list">
@@ -861,10 +854,8 @@
           </div>
         </div>
 
-        <!-- Mail Main Area -->
         <div class="mail-main">
           
-          <!-- Inbox Section -->
           <div id="mailSectionInbox">
             <div class="mail-toolbar">
               <strong>Inbox Folder</strong>
@@ -884,7 +875,6 @@
             </table>
           </div>
 
-          <!-- Sent Items Section -->
           <div id="mailSectionSent" style="display:none;">
             <div class="mail-toolbar">
               <strong>Sent Items</strong>
@@ -903,7 +893,6 @@
             </table>
           </div>
 
-          <!-- Compose Section -->
           <div id="mailSectionCompose" style="display:none;">
             <div class="mail-toolbar">
               <strong>New Message</strong>
@@ -925,7 +914,6 @@
             </form>
           </div>
 
-          <!-- View Single Message Section -->
           <div id="mailSectionView" style="display:none;">
             <div class="mail-toolbar">
               <button class="submit-btn" onclick="showMailSection('inbox')">⬅ Back to Inbox</button>
@@ -947,7 +935,6 @@
   </div>
 
   <script>
-    // Local In-Memory Email Data Store
     let currentAccount = 'alice@greenbox.com';
     let localEmails = [
       {
@@ -960,7 +947,6 @@
       }
     ];
 
-    // Page View Navigation
     function showView(viewName) {
       document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
       if(viewName === 'home') {
@@ -971,7 +957,6 @@
       }
     }
 
-    // Switch Account
     function switchAccount(email) {
       currentAccount = email;
       document.getElementById('currentAccountDisplay').innerText = email;
@@ -981,7 +966,6 @@
       renderMailbox();
     }
 
-    // Switch Mail Sections
     function showMailSection(section) {
       document.getElementById('mailSectionInbox').style.display = section === 'inbox' ? 'block' : 'none';
       document.getElementById('mailSectionSent').style.display = section === 'sent' ? 'block' : 'none';
@@ -992,14 +976,12 @@
       document.getElementById('folder-sent').classList.toggle('active-folder', section === 'sent');
     }
 
-    // Render Mailbox
     function renderMailbox() {
       const inbox = localEmails.filter(m => m.to.toLowerCase() === currentAccount.toLowerCase());
       const sent = localEmails.filter(m => m.from.toLowerCase() === currentAccount.toLowerCase());
 
       document.getElementById('unreadCountBadge').innerText = `(${inbox.length})`;
 
-      // Render Inbox
       const inboxBody = document.getElementById('inboxTableBody');
       if (inbox.length === 0) {
         inboxBody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#888;">No messages found in Inbox.</td></tr>`;
@@ -1013,7 +995,6 @@
         `).join('');
       }
 
-      // Render Sent
       const sentBody = document.getElementById('sentTableBody');
       if (sent.length === 0) {
         sentBody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#888;">No sent messages.</td></tr>`;
@@ -1028,7 +1009,6 @@
       }
     }
 
-    // Read Message
     function readMessage(msgId) {
       const msg = localEmails.find(m => m.id === msgId);
       if(!msg) return;
@@ -1048,7 +1028,7 @@
       showMailSection('view');
     }
 
-    // Updated Handle Send Email with Real EmailJS Delivery
+    // Handle Send Email using Service ID and Template ID
     function handleSendMail(e) {
       e.preventDefault();
       
@@ -1056,7 +1036,7 @@
       const subject = document.getElementById('composeSubject').value;
       const body = document.getElementById('composeBody').value;
 
-      // 1. Save to local retro webmail inbox interface
+      // Save locally to retro webmail view
       localEmails.push({
         id: Date.now().toString(),
         from: currentAccount,
@@ -1066,7 +1046,7 @@
         date: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
       });
 
-      // 2. Send REAL email across the internet via EmailJS
+      // Send via EmailJS with your service & template IDs
       const templateParams = {
         to_email: to,
         from_email: currentAccount,
@@ -1074,17 +1054,15 @@
         message: body
       };
 
-      // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your EmailJS credentials
-      emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+      emailjs.send('service_7mvyfpe', 'template_zn6uumu', templateParams)
         .then(function(response) {
            console.log('SUCCESS!', response.status, response.text);
            alert('Email delivered to real inbox successfully!');
         }, function(error) {
            console.log('FAILED...', error);
-           alert('Failed to deliver real email. Please check your EmailJS credentials.');
+           alert('Failed to deliver real email. Please check your EmailJS dashboard settings.');
         });
 
-      // Clear inputs and return to inbox
       document.getElementById('composeTo').value = '';
       document.getElementById('composeSubject').value = '';
       document.getElementById('composeBody').value = '';
@@ -1093,7 +1071,6 @@
       renderMailbox();
     }
 
-    // Send Story from Home Page to Webmail
     function sendStoryToWebmail(e) {
       e.preventDefault();
       const user = document.getElementById('userName').value;
@@ -1116,7 +1093,6 @@
       showView('webmail');
     }
 
-    // Speedframe Canvas Animation
     const canvas = document.getElementById('speedframeCanvas');
     const ctx = canvas.getContext('2d');
     let rectX = 110, rectY = 30, dx = 2, dy = 1.5, starAngle = 0;
