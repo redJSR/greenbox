@@ -249,8 +249,10 @@
       margin-bottom: 8px;
     }
 
-    .download-btn {
-      display: inline-block;
+    .try-web-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
       background: linear-gradient(180deg, #e6e6e6 0%, #cccccc 100%);
       border: 2px solid #666;
       border-radius: 3px;
@@ -261,6 +263,10 @@
       text-decoration: none;
       box-shadow: 1px 1px 0px #fff inset, -1px -1px 0px #888 inset;
       cursor: pointer;
+    }
+
+    .try-web-btn:hover {
+      background: linear-gradient(180deg, #ffffff 0%, #dddddd 100%);
     }
 
     /* Live Canvas Preview Box */
@@ -597,8 +603,8 @@
       background: #f9f9f9;
       border: 1px solid #cccccc;
       padding: 12px;
-      max-width: 400px;
-      margin: 20px auto;
+      max-width: 480px;
+      margin: 10px auto;
     }
 
     .compose-field {
@@ -608,20 +614,25 @@
     }
 
     .compose-field label {
-      width: 80px;
+      width: 90px;
       font-weight: bold;
     }
 
-    .compose-field input {
+    .compose-field input[type="text"], .compose-field input[type="email"], .compose-field input[type="password"] {
       flex: 1;
       padding: 4px;
       border: 1px solid #999;
       font-size: 11px;
     }
 
+    .compose-field input[type="file"] {
+      font-size: 11px;
+      flex: 1;
+    }
+
     .compose-textarea {
       width: 100%;
-      height: 180px;
+      height: 150px;
       padding: 6px;
       border: 1px solid #999;
       font-family: Arial, sans-serif;
@@ -648,7 +659,31 @@
       line-height: 1.4;
       white-space: pre-wrap;
       padding: 10px 0;
-      min-height: 120px;
+      min-height: 100px;
+    }
+
+    .attachment-box {
+      border-top: 1px dashed #aaa;
+      padding-top: 8px;
+      margin-top: 8px;
+      font-size: 11px;
+      background-color: #f0f0f0;
+      padding: 8px;
+      border-radius: 3px;
+    }
+
+    .attachment-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 4px 8px;
+      margin-top: 4px;
+      border-radius: 3px;
+      text-decoration: none;
+      color: #0059b3;
+      font-weight: bold;
     }
 
     /* GLOSSY SVG ICON ENGINE STYLES */
@@ -717,6 +752,20 @@
         <polygon points="2,2 14,8 2,14 5,8" fill="#00cc44" stroke="#005511" stroke-width="1"/>
         <polygon points="2,2 14,8 5,8" fill="#ffffff" opacity="0.4"/>
       </g>
+
+      <!-- Glossy Monitor / Web Play Icon -->
+      <g id="icon-monitor">
+        <rect x="1" y="2" width="14" height="10" rx="1" fill="#0088cc" stroke="#004466" stroke-width="1"/>
+        <ellipse cx="8" cy="4.5" rx="6" ry="2" fill="#ffffff" opacity="0.5"/>
+        <polygon points="7,5 11,7 7,9" fill="#ffffff"/>
+        <rect x="6" y="12" width="4" height="2" fill="#666"/>
+        <rect x="4" y="14" width="8" height="1" fill="#444"/>
+      </g>
+
+      <!-- Glossy Paperclip Attachment Icon -->
+      <g id="icon-paperclip">
+        <path d="M12 4 L5 11 A 2.5 2.5 0 0 0 8.5 14.5 L14 9 A 4 4 0 0 0 8.3 3.3 L3 8.6 A 5.5 5.5 0 0 0 10.8 16.4 L15 12" fill="none" stroke="#444444" stroke-width="1.5" stroke-linecap="round"/>
+      </g>
     </defs>
   </svg>
 
@@ -757,7 +806,7 @@
             <ul>
               <li><a href="#">Product Finder</a></li>
               <li><a href="#">Buy Products</a></li>
-              <li><a href="#">Tryout Software</a></li>
+              <li><a href="#demoSection">Tryout Software</a></li>
               <li><a href="#">Register Online</a></li>
               <li><a href="#">Free Plug-ins</a></li>
               <li><a href="#">Support Databases</a></li>
@@ -776,7 +825,7 @@
             </ul>
           </div>
 
-          <a href="#" class="get-player-badge">
+          <a href="#demoSection" class="get-player-badge">
             <img src="speedframe-logo.png" alt="Get Speedframe Player">
             <div class="badge-text">Get Speedframe Player 2.0</div>
           </a>
@@ -794,11 +843,13 @@
               <h1>Greenbox Speedframe</h1>
               <h2>Animation Power Made Easy</h2>
               <p>With intuitive timeline controls, vector tweening, and high-speed compression features in <a href="#">Greenbox Speedframe Business Edition</a>, you can create interactive sales graphics with minimal bandwidth.</p>
-              <a href="#" class="download-btn">Download Free Tryout (4.2 MB)</a>
+              <a href="#demoSection" class="try-web-btn">
+                <svg class="glossy-icon" viewBox="0 0 16 16"><use href="#icon-monitor"/></svg> Try on Web
+              </a>
             </div>
           </div>
 
-          <div class="demo-container">
+          <div class="demo-container" id="demoSection">
             <div class="demo-title">LIVE DEMO: Greenbox Speedframe Engine Output</div>
             <canvas id="speedframeCanvas" width="280" height="90"></canvas>
             <div class="demo-caption">Rendered live at 30 FPS using Speedframe Web Player standard.</div>
@@ -907,6 +958,7 @@
           <div style="margin-top:auto; font-size:10px; color:#666; border-top:1px solid #ccc; padding-top:6px;">
             <strong>System Status</strong><br>
             • Greenbox Mail Server: Online<br>
+            • Attachments: Enabled (Any Format)<br>
             • Encryption: 128-bit SSL
           </div>
         </div>
@@ -924,11 +976,12 @@
                 <tr>
                   <th>From</th>
                   <th>Subject</th>
+                  <th>Attachment</th>
                   <th>Date</th>
                 </tr>
               </thead>
               <tbody id="inboxTableBody">
-                <tr><td colspan="3" style="text-align:center; color:#888;">Please login to view inbox.</td></tr>
+                <tr><td colspan="4" style="text-align:center; color:#888;">Please login to view inbox.</td></tr>
               </tbody>
             </table>
           </div>
@@ -943,11 +996,12 @@
                 <tr>
                   <th>To</th>
                   <th>Subject</th>
+                  <th>Attachment</th>
                   <th>Date</th>
                 </tr>
               </thead>
               <tbody id="sentTableBody">
-                <tr><td colspan="3" style="text-align:center; color:#888;">No sent messages.</td></tr>
+                <tr><td colspan="4" style="text-align:center; color:#888;">No sent messages.</td></tr>
               </tbody>
             </table>
           </div>
@@ -1012,6 +1066,12 @@
                 <label>Subject:</label>
                 <input type="text" id="composeSubject" placeholder="Enter subject line..." required>
               </div>
+              <div class="compose-field">
+                <label style="display:flex; align-items:center; gap:3px;">
+                  <svg class="glossy-icon" viewBox="0 0 16 16"><use href="#icon-paperclip"/></svg> Attachment:
+                </label>
+                <input type="file" id="composeAttachment" accept="*/*">
+              </div>
               <textarea class="compose-textarea" id="composeBody" placeholder="Type your email message here..." required></textarea>
               <div>
                 <button type="submit" class="submit-btn" style="background:#ccffcc;">
@@ -1034,6 +1094,7 @@
               <div class="msg-header-line"><strong>Subject:</strong> <span id="viewSubject"></span></div>
               <div class="msg-header-line"><strong>Date:</strong> <span id="viewDate"></span></div>
               <div class="msg-body-content" id="viewBody"></div>
+              <div id="viewAttachmentArea" class="attachment-box" style="display:none;"></div>
             </div>
           </div>
 
@@ -1056,7 +1117,8 @@
         from: 'support@greenbox.com',
         to: 'alice@greenbox.com',
         subject: 'Welcome to My Greenbox Webmail!',
-        body: 'Welcome to Greenbox Webmail 2.0!\n\nYou can create user accounts and send messages across the system.',
+        body: 'Welcome to Greenbox Webmail 2.0!\n\nYou can create user accounts, attach files of any format, and send messages across the system.',
+        attachment: null,
         date: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
       }
     ];
@@ -1167,12 +1229,13 @@
 
       const inboxBody = document.getElementById('inboxTableBody');
       if (inbox.length === 0) {
-        inboxBody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#888;">No messages found in Inbox.</td></tr>`;
+        inboxBody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#888;">No messages found in Inbox.</td></tr>`;
       } else {
         inboxBody.innerHTML = inbox.map(m => `
           <tr onclick="readMessage('${m.id}')" class="unread-row">
             <td>${m.from}</td>
             <td>${m.subject}</td>
+            <td>${m.attachment ? '📎 ' + m.attachment.name : '-'}</td>
             <td>${m.date}</td>
           </tr>
         `).join('');
@@ -1180,12 +1243,13 @@
 
       const sentBody = document.getElementById('sentTableBody');
       if (sent.length === 0) {
-        sentBody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#888;">No sent messages.</td></tr>`;
+        sentBody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#888;">No sent messages.</td></tr>`;
       } else {
         sentBody.innerHTML = sent.map(m => `
           <tr onclick="readMessage('${m.id}')">
             <td>${m.to}</td>
             <td>${m.subject}</td>
+            <td>${m.attachment ? '📎 ' + m.attachment.name : '-'}</td>
             <td>${m.date}</td>
           </tr>
         `).join('');
@@ -1202,6 +1266,21 @@
       document.getElementById('viewDate').innerText = msg.date;
       document.getElementById('viewBody').innerText = msg.body;
 
+      const attachArea = document.getElementById('viewAttachmentArea');
+      if (msg.attachment) {
+        attachArea.style.display = 'block';
+        attachArea.innerHTML = `
+          <strong>Attached File:</strong><br>
+          <a href="${msg.attachment.data}" download="${msg.attachment.name}" class="attachment-item">
+            <svg class="glossy-icon" viewBox="0 0 16 16"><use href="#icon-paperclip"/></svg>
+            ${msg.attachment.name} (${Math.round(msg.attachment.size / 1024)} KB) - Download / View
+          </a>
+        `;
+      } else {
+        attachArea.style.display = 'none';
+        attachArea.innerHTML = '';
+      }
+
       document.getElementById('replyBtn').onclick = () => {
         showMailSection('compose');
         document.getElementById('composeTo').value = msg.from;
@@ -1211,12 +1290,25 @@
       showMailSection('view');
     }
 
-    function handleSendMail(e) {
+    async function handleSendMail(e) {
       e.preventDefault();
       
       const to = document.getElementById('composeTo').value;
       const subject = document.getElementById('composeSubject').value;
       const body = document.getElementById('composeBody').value;
+      const fileInput = document.getElementById('composeAttachment');
+
+      let attachmentData = null;
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const base64 = await convertFileToBase64(file);
+        attachmentData = {
+          name: file.name,
+          size: file.size,
+          type: file.type,
+          data: base64
+        };
+      }
 
       localEmails.push({
         id: Date.now().toString(),
@@ -1224,6 +1316,7 @@
         to: to,
         subject: subject,
         body: body,
+        attachment: attachmentData,
         date: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
       });
 
@@ -1233,7 +1326,7 @@
         to_email: to,
         from_email: currentAccount,
         subject: subject,
-        message: body
+        message: body + (attachmentData ? `\n\n[Attachment: ${attachmentData.name}]` : '')
       };
 
       emailjs.send('service_7mvyfpe', 'template_zn6uumu', templateParams);
@@ -1241,9 +1334,19 @@
       document.getElementById('composeTo').value = '';
       document.getElementById('composeSubject').value = '';
       document.getElementById('composeBody').value = '';
+      fileInput.value = '';
 
       showMailSection('inbox');
       renderMailbox();
+    }
+
+    function convertFileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+      });
     }
 
     function sendStoryToWebmail(e) {
@@ -1257,6 +1360,7 @@
         to: 'support@greenbox.com',
         subject: `Business Story Submission from ${user}`,
         body: story,
+        attachment: null,
         date: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
       });
 
