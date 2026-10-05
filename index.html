@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Greenbox - Speedframe</title>
+  <style>
+    /* Reset & Page Background */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #1a1a1a;
+      font-family: Arial, Helvetica, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      color: #000;
+    }
+
+    /* 1:1 Aspect Ratio CRT Display Container */
+    .crt-screen-container {
+      width: 100%;
+      max-width: 800px;
+      aspect-ratio: 1 / 1;
+      background-color: #ffffff;
+      border: 2px solid #555;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Top Utility Navigation Header */
+    .top-header {
+      background-color: #000000;
+      color: #ffffff;
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #000;
+    }
+
+    .brand-logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: white;
+    }
+
+    .brand-logo-img {
+      height: 38px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .header-links {
+      font-size: 11px;
+      color: #ccc;
+    }
+
+    .header-links a {
+      color: #ffffff;
+      text-decoration: none;
+      margin: 0 4px;
+    }
+
+    .header-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* Secondary Nav Bar */
+    .nav-bar {
+      background-color: #000000;
+      border-top: 1px solid #333;
+      padding: 4px 12px;
+      display: flex;
+      gap: 15px;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .nav-bar a {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .nav-bar a:hover {
+      color: #79ff4d;
+    }
+
+    /* Layout Columns Grid */
+    .main-body {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 170px 1fr 180px;
+      overflow-y: auto;
+      background-color: #ffffff;
+    }
+
+    .column {
+      padding: 10px;
+      font-size: 12px;
+    }
+
+    /* Sidebar Columns */
+    .left-col {
+      border-right: 1px solid #dcdcdc;
+      background-color: #f9f9f9;
+    }
+
+    .right-col {
+      border-left: 1px solid #dcdcdc;
+      background-color: #f9f9f9;
+    }
+
+    /* Link & Typography Formatting */
+    h3 {
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: #000;
+    }
+
+    .menu-group {
+      margin-bottom: 15px;
+    }
+
+    .menu-group ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .menu-group li {
+      margin-bottom: 3px;
+      padding-left: 8px;
+      position: relative;
+    }
+
+    .menu-group li::before {
+      content: "▪";
+      position: absolute;
+      left: 0;
+      color: #cc0000;
+      font-size: 10px;
+    }
+
+    a {
+      color: #cc0000;
+      text-decoration: underline;
+    }
+
+    a:hover {
+      color: #ff0000;
+    }
+
+    /* Center Feature Area */
+    .center-col {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .product-hero-box {
+      border: 1px solid #b0b0b0;
+      background: linear-gradient(180deg, #f0f0f0 0%, #e4e4e4 100%);
+      padding: 12px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .product-box-art {
+      width: 90px;
+      height: 90px;
+      border: 1px dashed #999;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4px;
+      font-size: 10px;
+    }
+
+    .product-box-art img {
+      max-width: 100%;
+      max-height: 50px;
+      object-fit: contain;
+      margin-bottom: 4px;
+    }
+
+    .product-info h1 {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 20px;
+      color: #990000;
+      margin-bottom: 2px;
+    }
+
+    .product-info h2 {
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .product-info p {
+      font-size: 11px;
+      line-height: 1.35;
+      color: #222;
+      margin-bottom: 8px;
+    }
+
+    /* Download Button Style */
+    .download-btn {
+      display: inline-block;
+      background: linear-gradient(180deg, #e6e6e6 0%, #cccccc 100%);
+      border: 2px solid #666;
+      border-radius: 3px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: bold;
+      color: #000;
+      text-decoration: none;
+      box-shadow: 1px 1px 0px #fff inset, -1px -1px 0px #888 inset;
+      cursor: pointer;
+    }
+
+    .download-btn:active {
+      box-shadow: -1px -1px 0px #fff inset, 1px 1px 0px #888 inset;
+      background: #bbb;
+    }
+
+    /* Live Interactive Canvas Demo Box */
+    .demo-container {
+      border: 1px solid #aaa;
+      background: #eeeeee;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .demo-title {
+      font-size: 11px;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: #333;
+    }
+
+    canvas {
+      background: #000;
+      border: 1px solid #444;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .demo-caption {
+      font-size: 10px;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    /* Article Sections */
+    .article-section h3 {
+      font-size: 14px;
+      font-weight: bold;
+      color: #000;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 2px;
+      margin-bottom: 4px;
+    }
+
+    .article-section p {
+      font-size: 11px;
+      line-height: 1.4;
+      color: #333;
+    }
+
+    /* Email / Feedback Form */
+    .contact-box {
+      border: 1px solid #ccc;
+      background-color: #f5f5f5;
+      padding: 10px;
+      margin-top: 4px;
+    }
+
+    .contact-box h3 {
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .contact-box p {
+      font-size: 11px;
+      margin-bottom: 8px;
+    }
+
+    .form-group {
+      margin-bottom: 6px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 10px;
+      font-weight: bold;
+      margin-bottom: 2px;
+    }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      font-size: 11px;
+      padding: 3px;
+      border: 1px solid #7f9db9;
+      font-family: Arial, sans-serif;
+    }
+
+    .submit-btn {
+      background: #e1e1e1;
+      border: 1px solid #707070;
+      padding: 3px 12px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      background: #eee;
+    }
+
+    /* Right Column Badges & Links */
+    .site-select-box {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 12px;
+    }
+
+    .site-select-box select {
+      font-size: 11px;
+      flex: 1;
+    }
+
+    .go-btn {
+      background: #2b72d0;
+      color: white;
+      border: none;
+      font-weight: bold;
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .promo-card {
+      margin-bottom: 12px;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .promo-card img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+
+    .promo-text {
+      font-size: 10px;
+      line-height: 1.25;
+    }
+
+    .promo-text a {
+      font-weight: bold;
+    }
+
+    .get-player-badge {
+      border: 1px solid #aaa;
+      background: #e0e0e0;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      margin-top: 10px;
+    }
+
+    .get-player-badge img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+    }
+
+    .badge-text {
+      font-size: 9px;
+      color: #000;
+      font-weight: bold;
+      line-height: 1.1;
+    }
+
+    .copyright {
+      font-size: 10px;
+      color: #666;
+      margin-top: 15px;
+      line-height: 1.2;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="crt-screen-container">
+    
+    <!-- Top Black Header -->
+    <header class="top-header">
+      <a href="#" class="brand-logo-container">
+        <!-- Replace 'greenbox-logo.png' with your logo file -->
+        <img src="greenbox-logo.png" alt="Greenbox Logo" class="brand-logo-img">
+      </a>
+      <div class="header-links">
+        <a href="#">Home</a> | 
+        <a href="#">Map</a> | 
+        <a href="#">Index</a> | 
+        <a href="#">Search</a> | 
+        <a href="#">Purchase</a>
+      </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-bar">
+      <a href="#">News</a>
+      <a href="#">Products</a>
+      <a href="#">Solutions</a>
+      <a href="#">Studio</a>
+      <a href="#">Support &amp; Services</a>
+      <a href="#">About Greenbox</a>
+    </nav>
+
+    <!-- Main Content Grid -->
+    <main class="main-body">
+      
+      <!-- Left Navigation Column -->
+      <aside class="column left-col">
+        <div class="menu-group">
+          <h3>Fast Find</h3>
+          <ul>
+            <li><a href="#">Product Finder</a></li>
+            <li><a href="#">Buy Products</a></li>
+            <li><a href="#">Tryout Software</a></li>
+            <li><a href="#">Register Online</a></li>
+            <li><a href="#">Free Plug-ins &amp; Updates</a></li>
+            <li><a href="#">Support Databases</a></li>
+            <li><a href="#">User Forums</a></li>
+            <li><a href="#">Job Listings</a></li>
+          </ul>
+        </div>
+
+        <div class="menu-group">
+          <h3>News &amp; Features</h3>
+          <ul>
+            <li><a href="#">Tips</a></li>
+            <li><a href="#">Case Studies</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">Columnists</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Press Releases</a></li>
+            <li><a href="#">Back Issues</a></li>
+          </ul>
+        </div>
+
+        <a href="#" class="get-player-badge">
+          <!-- Replace 'speedframe-logo.png' with your logo file -->
+          <img src="speedframe-logo.png" alt="Get Speedframe Player">
+          <div class="badge-text">Get Speedframe Player 2.0</div>
+        </a>
+      </aside>
+
+      <!-- Main Showcase Column -->
+      <section class="column center-col">
+        
+        <!-- Product Spotlight Box -->
+        <div class="product-hero-box">
+          <div class="product-box-art">
+            <!-- Replace 'speedframe-logo.png' with your logo file -->
+            <img src="speedframe-logo.png" alt="Speedframe Product Box">
+            <div><strong>GREENBOX</strong><br>Speedframe<br><span style="font-size:8px; color:#666;">v2.0 Edition</span></div>
+          </div>
+          <div class="product-info">
+            <h1>Greenbox Speedframe</h1>
+            <h2>Animation Power Made Easy</h2>
+            <p>With intuitive timeline controls, vector tweening, and high-speed compression features in <a href="#">Greenbox Speedframe Business Edition</a>, you can create first-rate interactive sales, web graphics, and animated marketing materials with minimal bandwidth.</p>
+            <a href="#" class="download-btn">Download Free Tryout (4.2 MB)</a>
+          </div>
+        </div>
+
+        <!-- Live Preview Canvas -->
+        <div class="demo-container">
+          <div class="demo-title">LIVE DEMO: Greenbox Speedframe Engine Output</div>
+          <canvas id="speedframeCanvas" width="280" height="100"></canvas>
+          <div class="demo-caption">Rendered live at 30 FPS using Speedframe Web Player standard.</div>
+        </div>
+
+        <!-- News Article -->
+        <article class="article-section">
+          <h3>Speedframe Drives Web Animation Standards</h3>
+          <p>In a recent <a href="#">press release</a>, Greenbox announced its high-speed Web Animation Markup proposal to the World Wide Web Consortium (W3C) alongside IBM, Netscape, and Sun Microsystems. Read the <a href="#">Q&amp;A</a> for more technical information.</p>
+        </article>
+
+        <!-- Send Email / Feedback Form -->
+        <div class="contact-box">
+          <h3>Send Us Your Business Story</h3>
+          <p>Are you using Greenbox software to achieve key business goals? Tell your story directly to the Greenbox web team!</p>
+          <form onsubmit="alert('Thank you for contacting Greenbox!'); return false;">
+            <div class="form-group">
+              <label for="userName">Your Name:</label>
+              <input type="text" id="userName" placeholder="e.g. Jane Doe" required>
+            </div>
+            <div class="form-group">
+              <label for="userEmail">Email Address:</label>
+              <input type="email" id="userEmail" placeholder="name@company.com" required>
+            </div>
+            <div class="form-group">
+              <label for="userMsg">Comments / Story:</label>
+              <textarea id="userMsg" rows="3" placeholder="Write your message here..."></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Email</button>
+          </form>
+        </div>
+
+      </section>
+
+      <!-- Right Column Promos & Links -->
+      <aside class="column right-col">
+        <div class="site-select-box">
+          <select>
+            <option>Greenbox Sites</option>
+            <option>US / North America</option>
+            <option>Europe</option>
+            <option>Asia Pacific</option>
+          </select>
+          <button class="go-btn">Go!</button>
+        </div>
+
+        <div class="promo-card">
+          <!-- Replace 'speedframe-logo.png' with your logo file -->
+          <img src="speedframe-logo.png" alt="Speedframe Web Animation">
+          <div class="promo-text">
+            <a href="#">Speedframe: Web Animation Hits High Gear</a>
+          </div>
+        </div>
+
+        <div class="promo-card">
+          <!-- Replace 'speedframe-logo.png' with your logo file -->
+          <img src="speedframe-logo.png" alt="User Gallery">
+          <div class="promo-text">
+            <a href="#">User Gallery: Animation Spotlight</a>
+          </div>
+        </div>
+
+        <div class="promo-card">
+          <!-- Replace 'speedframe-logo.png' with your logo file -->
+          <img src="speedframe-logo.png" alt="Gallery Maestro">
+          <div class="promo-text">
+            <a href="#">Gallery: Web Animation Maestro</a>
+          </div>
+        </div>
+
+        <div class="promo-card">
+          <!-- Replace 'speedframe-logo.png' with your logo file -->
+          <img src="speedframe-logo.png" alt="Statistics">
+          <div class="promo-text">
+            <a href="#">Smart, Simple Site Statistics</a>
+          </div>
+        </div>
+
+        <div class="copyright">
+          Copyright &copy; 1998-2000 Greenbox Systems Incorporated. All rights reserved.
+        </div>
+      </aside>
+
+    </main>
+
+  </div>
+
+  <!-- Live Animation Canvas Script -->
+  <script>
+    const canvas = document.getElementById('speedframeCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let rectX = 110;
+    let rectY = 35;
+    let dx = 2;
+    let dy = 1.5;
+
+    let starAngle = 0;
+
+    function animate() {
+      ctx.fillStyle = '#000000';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Grid line background
+      ctx.strokeStyle = '#113311';
+      ctx.lineWidth = 1;
+      for (let i = 0; i < canvas.width; i += 20) {
+        ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, canvas.height); ctx.stroke();
+      }
+      for (let j = 0; j < canvas.height; j += 20) {
+        ctx.beginPath(); ctx.moveTo(0, j); ctx.lineTo(canvas.width, j); ctx.stroke();
+      }
+
+      // Title overlay inside preview
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 10px monospace';
+      ctx.fillText('SPEEDFRAME', 105, 18);
+
+      // Green bouncing box
+      ctx.fillStyle = '#00FF00';
+      ctx.fillRect(rectX, rectY, 28, 28);
+      ctx.strokeStyle = '#FFFFFF';
+      ctx.strokeRect(rectX, rectY, 28, 28);
+
+      rectX += dx;
+      rectY += dy;
+
+      if (rectX + 28 > canvas.width - 20 || rectX < 20) dx = -dx;
+      if (rectY + 28 > canvas.height - 15 || rectY < 25) dy = -dy;
+
+      // Rotating Star
+      ctx.save();
+      ctx.translate(210, 55);
+      ctx.rotate(starAngle);
+      ctx.strokeStyle = '#FFFF00';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(-12, 0); ctx.lineTo(12, 0);
+      ctx.moveTo(0, -12); ctx.lineTo(0, 12);
+      ctx.stroke();
+      ctx.restore();
+
+      starAngle += 0.05;
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+
+</body>
+</html>
