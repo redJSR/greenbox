@@ -355,15 +355,6 @@
       object-fit: contain;
     }
 
-    .promo-text {
-      font-size: 10px;
-      line-height: 1.25;
-    }
-
-    .promo-text a {
-      font-weight: bold;
-    }
-
     .get-player-badge {
       border: 1px solid #aaa;
       background: #e0e0e0;
@@ -403,7 +394,7 @@
     <!-- Top Black Header -->
     <header class="top-header">
       <a href="#" class="brand-logo-container">
-        <img src="greenbox-logo.png" alt="Greenbox Logo" class="brand-logo-img" onerror="this.onerror=null; this.src='greenbox-logo.jpg';">
+        <img src="greenbox-logo.png" alt="Greenbox Logo" class="brand-logo-img">
       </a>
       <div class="header-links">
         <a href="#">Home</a> | 
@@ -457,7 +448,7 @@
         </div>
 
         <a href="#" class="get-player-badge">
-          <img src="speedframe-logo.png" class="speedframe-img" alt="Get Speedframe Player" onerror="handleImageError(this);">
+          <img src="speedframe-logo.png" alt="Get Speedframe Player">
           <div class="badge-text">Get Speedframe Player 2.0</div>
         </a>
       </aside>
@@ -468,7 +459,7 @@
         <!-- Product Spotlight Box -->
         <div class="product-hero-box">
           <div class="product-box-art">
-            <img src="speedframe-logo.png" class="speedframe-img" alt="Speedframe Product Box" onerror="handleImageError(this);">
+            <img src="speedframe-logo.png" alt="Speedframe Logo">
             <div><strong>GREENBOX</strong><br>Speedframe<br><span style="font-size:8px; color:#666;">v2.0 Edition</span></div>
           </div>
           <div class="product-info">
@@ -528,28 +519,28 @@
         </div>
 
         <div class="promo-card">
-          <img src="speedframe-logo.png" class="speedframe-img" alt="Speedframe Web Animation" onerror="handleImageError(this);">
+          <img src="speedframe-logo.png" alt="Speedframe Web Animation">
           <div class="promo-text">
             <a href="#">Speedframe: Web Animation Hits High Gear</a>
           </div>
         </div>
 
         <div class="promo-card">
-          <img src="speedframe-logo.png" class="speedframe-img" alt="User Gallery" onerror="handleImageError(this);">
+          <img src="speedframe-logo.png" alt="User Gallery">
           <div class="promo-text">
             <a href="#">User Gallery: Animation Spotlight</a>
           </div>
         </div>
 
         <div class="promo-card">
-          <img src="speedframe-logo.png" class="speedframe-img" alt="Gallery Maestro" onerror="handleImageError(this);">
+          <img src="speedframe-logo.png" alt="Gallery Maestro">
           <div class="promo-text">
             <a href="#">Gallery: Web Animation Maestro</a>
           </div>
         </div>
 
         <div class="promo-card">
-          <img src="speedframe-logo.png" class="speedframe-img" alt="Statistics" onerror="handleImageError(this);">
+          <img src="speedframe-logo.png" alt="Statistics">
           <div class="promo-text">
             <a href="#">Smart, Simple Site Statistics</a>
           </div>
@@ -564,24 +555,7 @@
 
   </div>
 
-  <!-- Fallback Script for Images -->
   <script>
-    const SVG_FALLBACK = "data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><circle cx='100' cy='100' r='95' fill='%2350e3c2'/><path d='M 30,100 C 30,40 80,10 140,10 C 180,10 190,40 160,70 C 120,110 60,110 40,130 C 20,150 40,180 80,185 C 130,190 180,160 190,120 C 180,170 120,200 60,190 C 20,180 10,140 30,100 Z' fill='%23000000'/></svg>";
-
-    function handleImageError(img) {
-      if (!img.getAttribute('data-tried-jpg')) {
-        img.setAttribute('data-tried-jpg', 'true');
-        img.src = 'speedframe-logo.jpg';
-      } else if (!img.getAttribute('data-tried-jpeg')) {
-        img.setAttribute('data-tried-jpeg', 'true');
-        img.src = 'speedframe-logo.jpeg';
-      } else {
-        img.onerror = null;
-        img.src = SVG_FALLBACK;
-      }
-    }
-
-    // Canvas Animation
     const canvas = document.getElementById('speedframeCanvas');
     const ctx = canvas.getContext('2d');
 
