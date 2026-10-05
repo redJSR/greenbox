@@ -10,6 +10,15 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
 
+  <!-- EmailJS SDK for Real Email Delivery -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function(){
+       // Replace with your EmailJS Public Key
+       emailjs.init("YOUR_PUBLIC_KEY");
+    })();
+  </script>
+
   <style>
     * {
       box-sizing: border-box;
@@ -1039,13 +1048,15 @@
       showMailSection('view');
     }
 
-    // Handle Send Email
+    // Updated Handle Send Email with Real EmailJS Delivery
     function handleSendMail(e) {
       e.preventDefault();
+      
       const to = document.getElementById('composeTo').value;
       const subject = document.getElementById('composeSubject').value;
       const body = document.getElementById('composeBody').value;
 
+      // 1. Save to local retro webmail inbox interface
       localEmails.push({
         id: Date.now().toString(),
         from: currentAccount,
@@ -1055,11 +1066,29 @@
         date: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
       });
 
+      // 2. Send REAL email across the internet via EmailJS
+      const templateParams = {
+        to_email: to,
+        from_email: currentAccount,
+        subject: subject,
+        message: body
+      };
+
+      // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your EmailJS credentials
+      emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+        .then(function(response) {
+           console.log('SUCCESS!', response.status, response.text);
+           alert('Email delivered to real inbox successfully!');
+        }, function(error) {
+           console.log('FAILED...', error);
+           alert('Failed to deliver real email. Please check your EmailJS credentials.');
+        });
+
+      // Clear inputs and return to inbox
       document.getElementById('composeTo').value = '';
       document.getElementById('composeSubject').value = '';
       document.getElementById('composeBody').value = '';
 
-      alert('Email sent successfully!');
       showMailSection('inbox');
       renderMailbox();
     }
