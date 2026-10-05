@@ -95,6 +95,9 @@
     .header-links .my-greenbox-link {
       color: #79ff4d;
       font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
     }
 
     /* Navigation Bar */
@@ -701,12 +704,30 @@
   <!-- SVG REUSABLE GLOSSY ICONS DEFINITIONS -->
   <svg style="display:none;">
     <defs>
+      <!-- Glossy Star Icon -->
+      <g id="icon-star">
+        <polygon points="8,1 10.3,5.7 15.5,6.5 11.7,10.2 12.6,15.3 8,12.9 3.4,15.3 4.3,10.2 0.5,6.5 5.7,5.7" fill="#ffe600" stroke="#b3a000" stroke-width="0.8"/>
+        <polygon points="8,1 10.3,5.7 15.5,6.5 11.7,10.2 8,12.9" fill="#ffffff" opacity="0.4"/>
+      </g>
+
       <!-- Glossy Key Icon -->
       <g id="icon-key">
         <circle cx="6" cy="6" r="4.5" fill="#ffd700" stroke="#b8860b" stroke-width="1"/>
         <circle cx="6" cy="6" r="2" fill="#000"/>
         <path d="M9 7 L15 13 L13.5 14.5 L12 13 L11 14 L9.5 12.5 L10.5 11.5 Z" fill="#ffd700" stroke="#b8860b" stroke-width="1"/>
         <ellipse cx="5" cy="4.5" rx="3" ry="1.5" fill="#ffffff" opacity="0.6"/>
+      </g>
+
+      <!-- Glossy Refresh Icon -->
+      <g id="icon-refresh">
+        <path d="M 8 2 A 6 6 0 1 0 14 8 L 12 8 A 4 4 0 1 1 8 4 L 8 6 L 12 3 L 8 0 Z" fill="#0066cc" stroke="#003366" stroke-width="0.5"/>
+        <ellipse cx="8" cy="4" rx="4" ry="2" fill="#ffffff" opacity="0.5"/>
+      </g>
+
+      <!-- Glossy Reply Left Arrow Icon -->
+      <g id="icon-reply">
+        <path d="M 14 12 C 14 7, 10 5, 7 5 L 7 2 L 1 7 L 7 12 L 7 9 C 10 9, 12 10, 14 12 Z" fill="#008000" stroke="#004d00" stroke-width="0.8"/>
+        <ellipse cx="7" cy="5" rx="4" ry="2" fill="#ffffff" opacity="0.5"/>
       </g>
 
       <!-- Glossy Create Account Plus Icon -->
@@ -781,7 +802,9 @@
         <a onclick="showView('home')">Map</a> | 
         <a onclick="showView('home')">Index</a> | 
         <a onclick="showView('home')">Search</a> | 
-        <a class="my-greenbox-link" onclick="showView('webmail')">★ My Greenbox</a>
+        <a class="my-greenbox-link" onclick="showView('webmail')">
+          <svg class="glossy-icon" viewBox="0 0 16 16"><use href="#icon-star"/></svg> My Greenbox
+        </a>
       </div>
     </header>
 
@@ -969,7 +992,9 @@
           <div id="mailSectionInbox">
             <div class="mail-toolbar">
               <strong>Inbox Folder</strong>
-              <button class="submit-btn" onclick="renderMailbox()">🔄 Refresh</button>
+              <button class="submit-btn" onclick="renderMailbox()">
+                <svg class="glossy-icon" viewBox="0 0 16 16"><use href="#icon-refresh"/></svg> Refresh
+              </button>
             </div>
             <table class="mail-table">
               <thead>
@@ -1086,7 +1111,9 @@
           <div id="mailSectionView" style="display:none;">
             <div class="mail-toolbar">
               <button class="submit-btn" onclick="showMailSection('inbox')">⬅ Back to Inbox</button>
-              <button class="submit-btn" id="replyBtn">↩ Reply</button>
+              <button class="submit-btn" id="replyBtn">
+                <svg class="glossy-icon" viewBox="0 0 16 16"><use href="#icon-reply"/></svg> Reply
+              </button>
             </div>
             <div class="view-msg-box">
               <div class="msg-header-line"><strong>From:</strong> <span id="viewFrom"></span></div>
@@ -1227,6 +1254,8 @@
 
       document.getElementById('unreadCountBadge').innerText = `(${inbox.length})`;
 
+      const paperclipIconHTML = `<svg class="glossy-icon" viewBox="0 0 16 16"><use href="#icon-paperclip"/></svg>`;
+
       const inboxBody = document.getElementById('inboxTableBody');
       if (inbox.length === 0) {
         inboxBody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#888;">No messages found in Inbox.</td></tr>`;
@@ -1235,7 +1264,7 @@
           <tr onclick="readMessage('${m.id}')" class="unread-row">
             <td>${m.from}</td>
             <td>${m.subject}</td>
-            <td>${m.attachment ? '📎 ' + m.attachment.name : '-'}</td>
+            <td>${m.attachment ? paperclipIconHTML + ' ' + m.attachment.name : '-'}</td>
             <td>${m.date}</td>
           </tr>
         `).join('');
@@ -1249,7 +1278,7 @@
           <tr onclick="readMessage('${m.id}')">
             <td>${m.to}</td>
             <td>${m.subject}</td>
-            <td>${m.attachment ? '📎 ' + m.attachment.name : '-'}</td>
+            <td>${m.attachment ? paperclipIconHTML + ' ' + m.attachment.name : '-'}</td>
             <td>${m.date}</td>
           </tr>
         `).join('');
