@@ -346,13 +346,14 @@
       margin-bottom: 12px;
       display: flex;
       gap: 8px;
-      align-items: flex-start;
+      align-items: center;
     }
 
     .promo-icon-svg {
-      width: 26px;
-      height: 26px;
+      width: 30px;
+      height: 30px;
       flex-shrink: 0;
+      filter: drop-shadow(1px 2px 2px rgba(0,0,0,0.35));
     }
 
     .promo-text {
@@ -516,7 +517,7 @@
 
       </section>
 
-      <!-- Right Column Promos & Links (CUSTOM VINTAGE ICONS) -->
+      <!-- Right Column Promos & Links (GLOSSY 2000s GEL ORB ICONS) -->
       <aside class="column right-col">
         <div class="site-select-box">
           <select>
@@ -528,49 +529,91 @@
           <button class="go-btn">Go!</button>
         </div>
 
-        <!-- Promo 1: Lightning Bolt Icon -->
+        <!-- Promo 1: Red Glossy Sphere + Lightning -->
         <div class="promo-card">
-          <svg class="promo-icon-svg" viewBox="0 0 32 32">
-            <rect width="32" height="32" rx="4" fill="#cc0000"/>
-            <polygon points="18,4 8,18 16,18 14,28 24,14 16,14" fill="#ffeb3b"/>
+          <svg class="promo-icon-svg" viewBox="0 0 40 40">
+            <defs>
+              <radialGradient id="redSphere" cx="35%" cy="30%" r="65%">
+                <stop offset="0%" stop-color="#ff7777"/>
+                <stop offset="50%" stop-color="#cc0000"/>
+                <stop offset="85%" stop-color="#770000"/>
+                <stop offset="100%" stop-color="#330000"/>
+              </radialGradient>
+              <linearGradient id="glossHighlight" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#ffffff" stop-opacity="0.0"/>
+              </linearGradient>
+            </defs>
+            <circle cx="20" cy="20" r="18" fill="url(#redSphere)" stroke="#550000" stroke-width="1"/>
+            <ellipse cx="20" cy="11" rx="12" ry="6" fill="url(#glossHighlight)"/>
+            <polygon points="22,8 11,21 19,21 17,32 28,17 20,17" fill="#ffff00" stroke="#ffaa00" stroke-width="0.5" filter="drop-shadow(0 1px 1px rgba(0,0,0,0.5))"/>
           </svg>
           <div class="promo-text">
             <a href="#">Speedframe: Web Animation Hits High Gear</a>
           </div>
         </div>
 
-        <!-- Promo 2: Spotlight / Star Icon -->
+        <!-- Promo 2: Blue Glossy Sphere + Star -->
         <div class="promo-card">
-          <svg class="promo-icon-svg" viewBox="0 0 32 32">
-            <rect width="32" height="32" rx="4" fill="#007acc"/>
-            <polygon points="16,4 19.5,12 28,12.5 21,18 23.5,26 16,21 8.5,26 11,18 4,12.5 12.5,12" fill="#ffffff"/>
+          <svg class="promo-icon-svg" viewBox="0 0 40 40">
+            <defs>
+              <radialGradient id="blueSphere" cx="35%" cy="30%" r="65%">
+                <stop offset="0%" stop-color="#66ccff"/>
+                <stop offset="50%" stop-color="#0066cc"/>
+                <stop offset="85%" stop-color="#003377"/>
+                <stop offset="100%" stop-color="#001133"/>
+              </radialGradient>
+            </defs>
+            <circle cx="20" cy="20" r="18" fill="url(#blueSphere)" stroke="#002255" stroke-width="1"/>
+            <ellipse cx="20" cy="11" rx="12" ry="6" fill="url(#glossHighlight)"/>
+            <polygon points="20,8 23.5,15 31,15.5 25,20.5 27,28 20,23.5 13,28 15,20.5 9,15.5 16.5,15" fill="#ffffff" filter="drop-shadow(0 1px 1px rgba(0,0,0,0.5))"/>
           </svg>
           <div class="promo-text">
             <a href="#">User Gallery: Animation Spotlight</a>
           </div>
         </div>
 
-        <!-- Promo 3: Paint Palette Icon -->
+        <!-- Promo 3: Green Glossy Sphere + Palette -->
         <div class="promo-card">
-          <svg class="promo-icon-svg" viewBox="0 0 32 32">
-            <rect width="32" height="32" rx="4" fill="#28a745"/>
-            <path d="M16,5 C10,5 5,10 5,16 C5,22 10,27 16,27 C18,27 20,25.5 20,23.5 C20,22.5 19.5,21.5 19,21 C18.5,20.5 18,19.5 18,18.5 C18,16.5 20,15 22,15 L24,15 C26.5,15 27,12 27,10 C26.5,7 22,5 16,5 Z" fill="#ffffff"/>
-            <circle cx="10" cy="11" r="2" fill="#e91e63"/>
-            <circle cx="16" cy="9" r="2" fill="#ffeb3b"/>
-            <circle cx="22" cy="11" r="2" fill="#00bcd4"/>
+          <svg class="promo-icon-svg" viewBox="0 0 40 40">
+            <defs>
+              <radialGradient id="greenSphere" cx="35%" cy="30%" r="65%">
+                <stop offset="0%" stop-color="#88ff88"/>
+                <stop offset="50%" stop-color="#00aa22"/>
+                <stop offset="85%" stop-color="#005511"/>
+                <stop offset="100%" stop-color="#002200"/>
+              </radialGradient>
+            </defs>
+            <circle cx="20" cy="20" r="18" fill="url(#greenSphere)" stroke="#003300" stroke-width="1"/>
+            <ellipse cx="20" cy="11" rx="12" ry="6" fill="url(#glossHighlight)"/>
+            <path d="M20,10 C14,10 10,14 10,20 C10,25 14,29 20,29 C22,29 23,27.5 23,26 C23,25 22.5,24 22,23.5 C21.5,23 21,22 21,21 C21,19.5 22.5,18 24,18 L26,18 C28,18 29,16 29,14 C28,11.5 24.5,10 20,10 Z" fill="#ffffff" filter="drop-shadow(0 1px 1px rgba(0,0,0,0.5))"/>
+            <circle cx="14" cy="16" r="1.5" fill="#ff0000"/>
+            <circle cx="19" cy="14" r="1.5" fill="#ffcc00"/>
+            <circle cx="24" cy="15" r="1.5" fill="#0066ff"/>
           </svg>
           <div class="promo-text">
             <a href="#">Gallery: Web Animation Maestro</a>
           </div>
         </div>
 
-        <!-- Promo 4: Bar Chart Icon -->
+        <!-- Promo 4: Orange Glossy Sphere + Chart -->
         <div class="promo-card">
-          <svg class="promo-icon-svg" viewBox="0 0 32 32">
-            <rect width="32" height="32" rx="4" fill="#ff9800"/>
-            <rect x="7" y="16" width="4" height="10" fill="#ffffff"/>
-            <rect x="14" y="10" width="4" height="16" fill="#ffffff"/>
-            <rect x="21" y="6" width="4" height="20" fill="#ffffff"/>
+          <svg class="promo-icon-svg" viewBox="0 0 40 40">
+            <defs>
+              <radialGradient id="orangeSphere" cx="35%" cy="30%" r="65%">
+                <stop offset="0%" stop-color="#ffcc66"/>
+                <stop offset="50%" stop-color="#ff8800"/>
+                <stop offset="85%" stop-color="#aa4400"/>
+                <stop offset="100%" stop-color="#441100"/>
+              </radialGradient>
+            </defs>
+            <circle cx="20" cy="20" r="18" fill="url(#orangeSphere)" stroke="#441100" stroke-width="1"/>
+            <ellipse cx="20" cy="11" rx="12" ry="6" fill="url(#glossHighlight)"/>
+            <g fill="#ffffff" filter="drop-shadow(0 1px 1px rgba(0,0,0,0.5))">
+              <rect x="11" y="22" width="4" height="8" rx="1"/>
+              <rect x="18" y="17" width="4" height="13" rx="1"/>
+              <rect x="25" y="12" width="4" height="18" rx="1"/>
+            </g>
           </svg>
           <div class="promo-text">
             <a href="#">Smart, Simple Site Statistics</a>
