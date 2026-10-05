@@ -349,10 +349,19 @@
       align-items: flex-start;
     }
 
-    .promo-card img {
-      width: 28px;
-      height: 28px;
-      object-fit: contain;
+    .promo-icon-svg {
+      width: 26px;
+      height: 26px;
+      flex-shrink: 0;
+    }
+
+    .promo-text {
+      font-size: 10px;
+      line-height: 1.25;
+    }
+
+    .promo-text a {
+      font-weight: bold;
     }
 
     .get-player-badge {
@@ -367,8 +376,8 @@
     }
 
     .get-player-badge img {
-      width: 22px;
-      height: 22px;
+      width: 24px;
+      height: 24px;
       object-fit: contain;
     }
 
@@ -447,6 +456,7 @@
           </ul>
         </div>
 
+        <!-- USES SPEEDFRAME LOGO -->
         <a href="#" class="get-player-badge">
           <img src="speedframe-logo.png" alt="Get Speedframe Player">
           <div class="badge-text">Get Speedframe Player 2.0</div>
@@ -456,7 +466,7 @@
       <!-- Main Showcase Column -->
       <section class="column center-col">
         
-        <!-- Product Spotlight Box -->
+        <!-- Product Spotlight Box - USES SPEEDFRAME LOGO -->
         <div class="product-hero-box">
           <div class="product-box-art">
             <img src="speedframe-logo.png" alt="Speedframe Logo">
@@ -506,7 +516,7 @@
 
       </section>
 
-      <!-- Right Column Promos & Links -->
+      <!-- Right Column Promos & Links (CUSTOM VINTAGE ICONS) -->
       <aside class="column right-col">
         <div class="site-select-box">
           <select>
@@ -518,29 +528,50 @@
           <button class="go-btn">Go!</button>
         </div>
 
+        <!-- Promo 1: Lightning Bolt Icon -->
         <div class="promo-card">
-          <img src="speedframe-logo.png" alt="Speedframe Web Animation">
+          <svg class="promo-icon-svg" viewBox="0 0 32 32">
+            <rect width="32" height="32" rx="4" fill="#cc0000"/>
+            <polygon points="18,4 8,18 16,18 14,28 24,14 16,14" fill="#ffeb3b"/>
+          </svg>
           <div class="promo-text">
             <a href="#">Speedframe: Web Animation Hits High Gear</a>
           </div>
         </div>
 
+        <!-- Promo 2: Spotlight / Star Icon -->
         <div class="promo-card">
-          <img src="speedframe-logo.png" alt="User Gallery">
+          <svg class="promo-icon-svg" viewBox="0 0 32 32">
+            <rect width="32" height="32" rx="4" fill="#007acc"/>
+            <polygon points="16,4 19.5,12 28,12.5 21,18 23.5,26 16,21 8.5,26 11,18 4,12.5 12.5,12" fill="#ffffff"/>
+          </svg>
           <div class="promo-text">
             <a href="#">User Gallery: Animation Spotlight</a>
           </div>
         </div>
 
+        <!-- Promo 3: Paint Palette Icon -->
         <div class="promo-card">
-          <img src="speedframe-logo.png" alt="Gallery Maestro">
+          <svg class="promo-icon-svg" viewBox="0 0 32 32">
+            <rect width="32" height="32" rx="4" fill="#28a745"/>
+            <path d="M16,5 C10,5 5,10 5,16 C5,22 10,27 16,27 C18,27 20,25.5 20,23.5 C20,22.5 19.5,21.5 19,21 C18.5,20.5 18,19.5 18,18.5 C18,16.5 20,15 22,15 L24,15 C26.5,15 27,12 27,10 C26.5,7 22,5 16,5 Z" fill="#ffffff"/>
+            <circle cx="10" cy="11" r="2" fill="#e91e63"/>
+            <circle cx="16" cy="9" r="2" fill="#ffeb3b"/>
+            <circle cx="22" cy="11" r="2" fill="#00bcd4"/>
+          </svg>
           <div class="promo-text">
             <a href="#">Gallery: Web Animation Maestro</a>
           </div>
         </div>
 
+        <!-- Promo 4: Bar Chart Icon -->
         <div class="promo-card">
-          <img src="speedframe-logo.png" alt="Statistics">
+          <svg class="promo-icon-svg" viewBox="0 0 32 32">
+            <rect width="32" height="32" rx="4" fill="#ff9800"/>
+            <rect x="7" y="16" width="4" height="10" fill="#ffffff"/>
+            <rect x="14" y="10" width="4" height="16" fill="#ffffff"/>
+            <rect x="21" y="6" width="4" height="20" fill="#ffffff"/>
+          </svg>
           <div class="promo-text">
             <a href="#">Smart, Simple Site Statistics</a>
           </div>
