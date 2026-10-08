@@ -13,17 +13,14 @@
             font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
             font-size: 11px;
         }
-
         body {
-            background-color: #f3efe2; /* Classic tannish background */
+            background-color: #f3efe2;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 10px;
         }
-
-        /* Windows XP Window Container */
         .xp-window {
             width: 100%;
             max-width: 1100px;
@@ -36,8 +33,6 @@
             flex-direction: column;
             overflow: hidden;
         }
-
-        /* Title Bar */
         .xp-title-bar {
             background: linear-gradient(to bottom, #0058ee 0%, #3593ff 4%, #288ace 6%, #0058ee 10%, #0055ea 90%, #003dd7 100%);
             padding: 4px 6px;
@@ -49,27 +44,22 @@
             font-size: 12px;
             text-shadow: 1px 1px 1px #000;
         }
-
         .title-left {
             display: flex;
             align-items: center;
             gap: 6px;
         }
-
         .title-logo {
             height: 20px;
             cursor: pointer;
         }
-
         .title-icon {
             height: 18px;
         }
-
         .window-controls {
             display: flex;
             gap: 2px;
         }
-
         .xp-btn {
             width: 21px;
             height: 21px;
@@ -84,39 +74,30 @@
             cursor: pointer;
             box-shadow: inset -1px -1px #808080, inset 1px 1px #ffffff;
         }
-
         .xp-btn-close {
             background: linear-gradient(to bottom, #e76d54, #be381e);
             color: white;
         }
-
-        /* Classic Menu Bar */
         .menu-bar {
             background: #d4d0c8;
             display: flex;
             padding: 2px 4px;
             border-bottom: 1px solid #808080;
         }
-
         .menu-item {
             padding: 2px 8px;
             cursor: pointer;
         }
-
         .menu-item:hover {
             background: #0a246a;
             color: white;
         }
-
-        /* Classic Flash 2/3 Workspace Layout */
         .workspace {
             display: flex;
             flex: 1;
             overflow: hidden;
             background: #808080;
         }
-
-        /* Toolbar (Left) */
         .toolbar {
             width: 56px;
             background: #d4d0c8;
@@ -128,13 +109,11 @@
             padding: 4px;
             gap: 2px;
         }
-
         .tool-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2px;
         }
-
         .tool-btn {
             width: 22px;
             height: 22px;
@@ -147,12 +126,11 @@
             cursor: pointer;
             font-weight: bold;
         }
-
         .tool-btn.active {
             background: #ece9d8;
             box-shadow: inset 1px 1px #808080;
+            border: 1px inset #808080;
         }
-
         .tool-options {
             margin-top: 10px;
             width: 100%;
@@ -163,23 +141,18 @@
             align-items: center;
             gap: 6px;
         }
-
         .color-swatch {
             width: 20px;
             height: 20px;
             border: 1px solid #000;
             cursor: pointer;
         }
-
-        /* Main Center Area: Timeline + Stage */
         .main-pane {
             flex: 1;
             display: flex;
             flex-direction: column;
             overflow: hidden;
         }
-
-        /* Timeline (Top Pane) */
         .timeline-container {
             height: 140px;
             background: #d4d0c8;
@@ -187,7 +160,6 @@
             display: flex;
             flex-direction: column;
         }
-
         .timeline-controls {
             height: 24px;
             background: #ece9d8;
@@ -197,20 +169,27 @@
             padding: 0 6px;
             gap: 12px;
         }
-
+        .timeline-controls button {
+            padding: 1px 6px;
+            background: #d4d0c8;
+            border: 1px solid #fff;
+            box-shadow: inset -1px -1px #808080, inset 1px 1px #fff;
+            cursor: pointer;
+        }
+        .timeline-controls button:active {
+            box-shadow: inset 1px 1px #808080;
+        }
         .timeline-body {
             flex: 1;
             display: flex;
             overflow: hidden;
         }
-
         .layer-pane {
             width: 150px;
             background: #ffffff;
             border-right: 2px solid #808080;
             overflow-y: auto;
         }
-
         .layer-item {
             height: 20px;
             border-bottom: 1px solid #d4d0c8;
@@ -220,34 +199,65 @@
             justify-content: space-between;
             background: #e0e0e0;
         }
-
         .layer-item.selected {
             background: #0a246a;
             color: white;
         }
-
         .frame-pane {
             flex: 1;
             background: #ffffff;
             overflow-x: auto;
             position: relative;
+            display: flex;
+            flex-direction: column;
         }
-
         .frame-ruler {
             height: 20px;
             background: #d4d0c8;
             border-bottom: 1px solid #808080;
             display: flex;
         }
-
+        .frame-strip {
+            height: 20px;
+            display: flex;
+            background: #fff;
+        }
         .frame-cell {
-            width: 10px;
+            width: 12px;
             height: 100%;
             border-right: 1px solid #c0c0c0;
             flex-shrink: 0;
+            cursor: pointer;
+            position: relative;
+            font-size: 9px;
+            text-align: center;
+            line-height: 20px;
+            color: #666;
         }
-
-        /* Stage View */
+        .frame-strip .frame-cell {
+            border-bottom: 1px solid #c0c0c0;
+            background: #f0f0f0;
+        }
+        .frame-strip .frame-cell.has-content {
+            background: #c0c0c0;
+        }
+        .frame-strip .frame-cell.has-content::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #000;
+            border-radius: 5px;
+            top: 8px;
+            left: 4px;
+        }
+        .frame-cell.active-frame {
+            background: #ff0000 !important;
+            color: #fff !important;
+        }
+        .frame-strip .frame-cell.active-frame::after {
+            background: #fff;
+        }
         .stage-container {
             flex: 1;
             background: #808080;
@@ -257,19 +267,15 @@
             overflow: auto;
             position: relative;
         }
-
         .stage-canvas-wrapper {
             background: #ffffff;
             box-shadow: 3px 3px 8px rgba(0,0,0,0.5);
             position: relative;
         }
-
         canvas {
             display: block;
             cursor: crosshair;
         }
-
-        /* Portal View Placeholder */
         .portal-overlay {
             display: none;
             position: absolute;
@@ -285,11 +291,9 @@
             justify-content: center;
             text-align: center;
         }
-
         .portal-overlay.active {
             display: flex;
         }
-
         .portal-card {
             background: #ffffff;
             border: 2px solid #0055ea;
@@ -298,13 +302,11 @@
             max-width: 500px;
             box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
         }
-
         .portal-card h2 {
             font-size: 16px;
             margin-bottom: 10px;
             color: #0055ea;
         }
-
         .portal-card button {
             margin-top: 15px;
             padding: 4px 12px;
@@ -316,12 +318,10 @@
     </style>
 </head>
 <body>
-
     <div class="xp-window">
         <!-- XP Title Bar -->
         <div class="xp-title-bar">
             <div class="title-left">
-                <!-- Home Logo -->
                 <img src="assets/vectormotion-logo.png" alt="Vectormotion" class="title-logo" id="vectormotionLogo" title="Click to go Home">
                 <img src="assets/speedframe-icon.png" alt="Speedframe" class="title-icon">
                 <span>Vectormotion Speedframe - [Movie1]</span>
@@ -339,128 +339,3 @@
             <div class="menu-item">Edit</div>
             <div class="menu-item">View</div>
             <div class="menu-item">Insert</div>
-            <div class="menu-item">Modify</div>
-            <div class="menu-item">Control</div>
-            <div class="menu-item">Xtras</div>
-            <div class="menu-item">Window</div>
-            <div class="menu-item">Help</div>
-        </div>
-
-        <!-- Workspace Container -->
-        <div class="workspace">
-            <!-- Left Toolbar -->
-            <div class="toolbar">
-                <div class="tool-grid">
-                    <div class="tool-btn active" id="toolBrush" title="Brush">🖌</div>
-                    <div class="tool-btn" id="toolPencil" title="Pencil">✏</div>
-                    <div class="tool-btn" id="toolLine" title="Line">╱</div>
-                    <div class="tool-btn" id="toolRect" title="Rectangle">▭</div>
-                    <div class="tool-btn" id="toolCircle" title="Oval">◯</div>
-                    <div class="tool-btn" id="toolEraser" title="Eraser">⌫</div>
-                </div>
-
-                <div class="tool-options">
-                    <label>Stroke</label>
-                    <input type="color" id="strokeColor" value="#000000" class="color-swatch">
-                    <label>Fill</label>
-                    <input type="color" id="fillColor" value="#ff0000" class="color-swatch">
-                </div>
-            </div>
-
-            <!-- Central Timeline & Stage Area -->
-            <div class="main-pane">
-                <!-- Timeline Section -->
-                <div class="timeline-container">
-                    <div class="timeline-controls">
-                        <button id="btnPlay">► Play</button>
-                        <button id="btnStop">❚❚ Stop</button>
-                        <span>FPS: <input type="number" id="fpsInput" value="12" style="width: 35px;"></span>
-                        <span>Frame: <strong id="currentFrameLabel">1</strong></span>
-                    </div>
-                    <div class="timeline-body">
-                        <div class="layer-pane">
-                            <div class="layer-item selected">✏ Layer 1</div>
-                        </div>
-                        <div class="frame-pane" id="framePane">
-                            <div class="frame-ruler" id="frameRuler">
-                                <!-- Generated by JS -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Canvas Workspace Stage -->
-                <div class="stage-container">
-                    <div class="stage-canvas-wrapper">
-                        <canvas id="stage" width="550" height="400"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Vectormotion Home Portal Overlay -->
-        <div class="portal-overlay" id="portalOverlay">
-            <div class="portal-card">
-                <h2>Vectormotion Portal</h2>
-                <p>Welcome to the main homepage placeholder for Vectormotion Inc.</p>
-                <button id="btnReturn">Back to Speedframe Workspace</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // DOM Elements
-        const stage = document.getElementById('stage');
-        const ctx = stage.getContext('2d');
-        const strokePicker = document.getElementById('strokeColor');
-        const fillPicker = document.getElementById('fillColor');
-        const frameRuler = document.getElementById('frameRuler');
-        const vectormotionLogo = document.getElementById('vectormotionLogo');
-        const portalOverlay = document.getElementById('portalOverlay');
-        const btnReturn = document.getElementById('btnReturn');
-
-        // State variables
-        let isDrawing = false;
-        let activeTool = 'brush';
-        let currentFrame = 1;
-
-        // Render Frame Ruler
-        for (let i = 1; i <= 60; i++) {
-            const cell = document.createElement('div');
-            cell.className = 'frame-cell';
-            cell.title = `Frame ${i}`;
-            if (i % 5 === 0) cell.style.background = '#e0e0e0';
-            frameRuler.appendChild(cell);
-        }
-
-        // Basic Drawing Logic
-        stage.addEventListener('mousedown', (e) => {
-            isDrawing = true;
-            ctx.beginPath();
-            const rect = stage.getBoundingClientRect();
-            ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
-        });
-
-        stage.addEventListener('mousemove', (e) => {
-            if (!isDrawing) return;
-            const rect = stage.getBoundingClientRect();
-            ctx.strokeStyle = strokePicker.value;
-            ctx.lineWidth = 3;
-            ctx.lineCap = 'round';
-            ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
-            ctx.stroke();
-        });
-
-        stage.addEventListener('mouseup', () => isDrawing = false);
-
-        // Home Navigation Overlay
-        vectormotionLogo.addEventListener('click', () => {
-            portalOverlay.classList.add('active');
-        });
-
-        btnReturn.addEventListener('click', () => {
-            portalOverlay.classList.remove('active');
-        });
-    </script>
-</body>
-</html>
