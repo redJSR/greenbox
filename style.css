@@ -3,7 +3,7 @@
 html{background:#b9b9b9}
 body{margin:0 auto;width:800px;background:#fff;font:11px/1.5 Verdana,Geneva,sans-serif;color:#222;border-left:1px solid #666;border-right:1px solid #666;min-height:100vh}
 a{color:var(--link)}
-img{border:0}
+img{border:0;max-width:100%;height:auto}
 header{height:92px;position:relative;background:linear-gradient(90deg,#fff 0%,#fff 50%,#cfcfcf 100%)}
 header .logo{position:absolute;left:16px;top:12px}
 header .logo img{width:44px;display:block}
