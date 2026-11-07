@@ -1,6 +1,6 @@
 :root{--green:#2ee600;--link:#17a800;--grey:#777;--serif:"Minion Pro","Minion 3","Crimson Text","Times New Roman",Georgia,serif;--cond:"PT Sans Narrow","Arial Narrow","HelveticaNeue-CondensedBold","Avenir Next Condensed",Arial,sans-serif}
 *{box-sizing:border-box}
-html{background:#b9b9b9}
+html{background:#b9b9b9;-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:hidden}
 body{margin:0 auto;width:800px;background:#fff;font:11px/1.5 Verdana,Geneva,sans-serif;color:#222;border-left:1px solid #666;border-right:1px solid #666}
 a{color:var(--link)}
 img{border:0;max-width:100%;height:auto}
