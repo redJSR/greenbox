@@ -1,4 +1,4 @@
-:root{--green:#2ee600;--link:#17a800;--grey:#777;--cond:"PT Sans Narrow","Arial Narrow","HelveticaNeue-CondensedBold","Avenir Next Condensed",Arial,sans-serif}
+:root{--green:#2ee600;--link:#17a800;--grey:#777;--serif:"Minion Pro","Minion 3","Crimson Text","Times New Roman",Georgia,serif;--cond:"PT Sans Narrow","Arial Narrow","HelveticaNeue-CondensedBold","Avenir Next Condensed",Arial,sans-serif}
 *{box-sizing:border-box}
 html{background:#b9b9b9}
 body{margin:0 auto;width:800px;background:#fff;font:11px/1.5 Verdana,Geneva,sans-serif;color:#222;border-left:1px solid #666;border-right:1px solid #666;min-height:100vh}
@@ -20,7 +20,7 @@ nav a:hover{color:#000;border-bottom-color:#2a2a2a}
 .hero .pic span{color:var(--green);font:bold 44px/0.95 var(--cond);padding:16px}
 .hero .msg{flex:1;padding:44px 16px 0 18px}
 .hero h1{margin:0;font:bold 36px/1.02 var(--cond);letter-spacing:-1px}
-.hero h1 em{font-style:normal;color:var(--link)}
+.hero h1 em{font:normal 400 42px/1 var(--serif);letter-spacing:-.5px;color:var(--link)}
 .hero p{font:bold 12px/1.4 Verdana,sans-serif;margin:8px 0 6px;letter-spacing:-.2px}
 .hero .date{display:inline-block;background:var(--green);color:#000;border:1px solid #1a8000;padding:2px 8px;margin:2px 0 8px}
 .hero .more{color:var(--link);font-weight:bold;font-size:13px;text-decoration:none}
@@ -32,9 +32,11 @@ nav a:hover{color:#000;border-bottom-color:#2a2a2a}
 .cols{display:grid;grid-template-columns:150px 230px 1fr;padding-bottom:20px}
 .c1{padding:20px 14px}
 .c1 a.t{display:block;font-weight:bold;color:#777;margin-bottom:16px}
-.btn{display:block;border:2px outset #ccc;background:#e4e4e4;padding:5px 7px;margin-bottom:9px;font:bold 10px Verdana,sans-serif;color:#333;text-decoration:none;width:122px}
+.btn{display:block;border:2px outset #ccc;background:#e4e4e4;padding:4px 7px;margin-bottom:9px;font:11px Verdana,sans-serif;color:#333;text-decoration:none;width:122px}
 .btn:active{border-style:inset}
-.btn b{color:var(--link)}
+.btn i{font:italic 400 12px var(--serif);color:#555}
+.btn b{font:normal 400 16px/1.1 var(--serif);color:var(--link)}
+.btn span{font:bold 11px Verdana,sans-serif;color:#333}
 .free{margin-top:18px;font:bold 20px/0.95 var(--cond);color:#222}
 .free span{color:var(--link)}
 ul{margin:0;padding:0;list-style:none}
