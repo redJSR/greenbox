@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=800">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Greenbox - Creative software, always free</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&family=Crimson+Text:ital@0;1&display=swap">
 <link rel="icon" href="greenbox-favicon.png">
@@ -68,5 +68,20 @@
  </ul>
  <span class="priv">Greenbox site privacy statement</span>
 </footer>
+<script>
+(function(){
+ var b=document.body,W=800;
+ function fit(){
+  b.style.zoom=1;
+  var h=b.offsetHeight,s=Math.min(window.innerWidth/W,window.innerHeight/h,1);
+  b.style.zoom=s;
+ }
+ fit();
+ window.addEventListener('load',fit);
+ window.addEventListener('resize',fit);
+ window.addEventListener('orientationchange',function(){setTimeout(fit,200)});
+ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
+})();
+</script>
 </body>
 </html>
