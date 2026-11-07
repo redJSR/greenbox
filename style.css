@@ -16,7 +16,7 @@ nav{position:absolute;left:150px;bottom:0;display:flex;gap:3px}
 nav a{display:block;width:100px;font:bold 15px var(--cond);color:var(--grey);text-decoration:none;border-bottom:7px solid #777;padding-bottom:2px}
 nav a:hover{color:#000;border-bottom-color:#2a2a2a}
 .hero{display:flex;height:256px}
-.hero .pic{flex:0 0 360px;background:#111 url(images/hero.jpg) center/cover;display:flex;align-items:flex-end;border-bottom:1px solid #444}
+.hero .pic{flex:0 0 360px;background:#111 url(hero.jpg) center/cover;display:flex;align-items:flex-end;border-bottom:1px solid #444}
 .hero .pic span{color:var(--green);font:bold 44px/0.95 var(--cond);padding:16px}
 .hero .msg{flex:1;padding:44px 16px 0 18px}
 .hero h1{margin:0;font:bold 36px/1.02 var(--cond);letter-spacing:-1px}
