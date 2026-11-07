@@ -17,7 +17,7 @@ nav a{display:block;width:100px;font:bold 15px var(--cond);color:var(--grey);tex
 nav a:hover{color:#000;border-bottom-color:#2a2a2a}
 .hero{display:flex;height:256px}
 .hero .pic{flex:0 0 360px;background:#111 url(hero.jpg) center/cover;display:flex;align-items:flex-end;border-bottom:1px solid #444}
-.hero .pic span{color:var(--green);font:bold 44px/0.95 var(--cond);padding:16px}
+.hero .pic span{color:#fff;font:bold 44px/0.95 var(--cond);padding:16px;opacity:1}
 .hero .msg{flex:1;padding:44px 16px 0 18px}
 .hero h1{margin:0;font:bold 36px/1.02 var(--cond);letter-spacing:-1px}
 .hero h1 em{font:normal 400 42px/1 var(--serif);letter-spacing:-.5px;color:var(--link)}
@@ -56,3 +56,6 @@ footer p{margin:10px 0 4px;font-size:12px}
 footer ul{list-style:disc;padding-left:28px}
 footer li{margin:2px 0;font-size:12px}
 .priv{display:inline-block;border:2px solid #000;background:var(--green);font:bold 10px Verdana,sans-serif;padding:4px 8px;margin-top:8px;color:#000}
+
+.c1 .ico{display:block;width:64px;height:auto;margin:0 0 8px}
+.c3 .pbox{flex:0 0 62px;width:62px;height:auto;align-self:flex-start}
