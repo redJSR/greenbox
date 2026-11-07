@@ -72,9 +72,12 @@
 (function(){
  var b=document.body,W=800;
  function fit(){
-  b.style.zoom=1;
-  var h=b.offsetHeight,s=Math.min(window.innerWidth/W,window.innerHeight/h,1);
-  b.style.zoom=s;
+  b.style.transform='none';b.style.margin='0';
+  var h=b.offsetHeight,vw=window.innerWidth,vh=window.innerHeight;
+  var s=Math.min(vw/W,vh/h,1);
+  b.style.transformOrigin='0 0';
+  b.style.transform='translateX('+Math.max(0,(vw-W*s)/2)+'px) scale('+s+')';
+  b.style.marginBottom=(-h*(1-s))+'px';
  }
  fit();
  window.addEventListener('load',fit);
