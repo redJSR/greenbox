@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Greenbox - Animation tools, free for everyone</title>
+<meta name="viewport" content="width=840">
+<link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=4">
+<script>window.RufflePlayer=window.RufflePlayer||{};window.RufflePlayer.config={autoplay:"on",unmuteOverlay:"hidden",splashScreen:false,letterbox:"off"};</script>
+<script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+</head>
+<body>
+<div id="page">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".035 .06" numOctaves="3" seed="4"/><feDisplacementMap in="SourceGraphic" scale="14"/></filter>
+  <filter id="rip" x="0" y="-50%" width="100%" height="200%"><feTurbulence type="fractalNoise" baseFrequency=".09 .3" numOctaves="3" seed="2"/><feDisplacementMap in="SourceGraphic" scale="9"/></filter>
+</svg>
+
+<div id="top">
+  <a id="logo" href="index.html"><span class="gh">GH</span><span><span class="brand">Greenbox</span><small>SYNCCORE SUITE</small></span></a>
+  <svg class="cap" viewBox="0 0 100 100" role="img" aria-label="Free, as in beer">
+    <circle cx="50" cy="50" r="45" fill="none" stroke="#7d6a35" stroke-width="9" stroke-dasharray="6 3.2"/>
+    <circle cx="50" cy="50" r="40" fill="#1f6a1f"/><circle cx="50" cy="50" r="34" fill="none" stroke="#4aa63a" stroke-width="2"/>
+    <text x="50" y="52" text-anchor="middle" font-family="Arvo,Georgia,serif" font-weight="700" font-size="21" fill="#f4c62b">FREE</text>
+    <text x="50" y="66" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="9.5" fill="#fff">as in beer</text>
+  </svg>
+  <div id="nav"><a href="index.html" class="on">Home</a><a href="#">Speedframe</a><a href="#">Products</a><a href="#">Support</a><a href="#">Blog</a></div>
+  <div id="search"><input type="text" placeholder="Search..." aria-label="Search"></div>
+</div>
+
+<div id="hero">
+  <svg class="stroke" width="440" height="190" viewBox="0 0 440 190" aria-hidden="true">
+    <path filter="url(#rough)" d="M12 40 L60 16 L250 26 L410 10 L425 60 L400 100 L428 150 L330 176 L150 166 L40 170 L24 118 Z" fill="#d6508c"/>
+    <path filter="url(#rough)" d="M30 60 L400 40 M40 110 L390 125" stroke="#e7709f" stroke-width="12" opacity=".5" fill="none"/>
+  </svg>
+  <h1>Animation for<br>everyone. Free!</h1>
+  <p class="sub">Design should be fun, not expensive. Speedframe makes animating easier and cheaper than ever.</p>
+  <img class="art" src="boxyandpc.png" alt="Boxy the panda next to a computer running Speedframe">
+  <div class="btns">
+    <span class="btn y">COMING JAN 15, 2027</span><span class="or">or</span><a class="btn b" href="#">LEARN MORE</a>
+  </div>
+</div>
+
+<svg class="torn" viewBox="0 0 780 20" preserveAspectRatio="none" aria-hidden="true"><rect filter="url(#rip)" x="-10" y="6" width="800" height="9" fill="#9aa8c6"/></svg>
+<div id="intro">
+  <p>You want people to love your website. You want them to be impressed, amazed, thrilled. Greenbox Speedframe is the animation software built to light that spark in your visitors' eyes.</p>
+  <p>Speedframe and the SyncCore Suite are completely free for personal and commercial use. As in $0.00! There is no catch. They launch on January 15, 2027, and we can't wait for you to try them.</p>
+</div>
+
+<div id="cols">
+  <div>
+    <div class="tile"><embed src="Tools.swf" type="application/x-shockwave-flash" width="292" height="194" quality="high"></div>
+    <h2>More creativity, less scripting!</h2>
+    <p>Speedframe comes packed with dozens of animated effects you can apply to shapes and text without writing any code.</p>
+    <p>Focus on expressing your creativity and making animations. No scripting, and no subscription.</p>
+  </div>
+  <div>
+    <div class="tile"><embed src="Papagaji.swf" type="application/x-shockwave-flash" width="292" height="194" quality="high"></div>
+    <h2>Familiar user interface.</h2>
+    <p>Speedframe follows the good practices of other successful design software. Timeline, tweens, symbols, library, and filters all feel like home.</p>
+    <p>It's like switching from one browser to another. Making the move takes no hassle at all.</p>
+  </div>
+  <div>
+    <div class="tile"><embed src="Pegla.swf" type="application/x-shockwave-flash" width="292" height="194" quality="high"></div>
+    <h2>Exciting new features!</h2>
+    <p>An advanced color palette editor, shape tweening that actually works, and dozens of integrated features that work together.</p>
+    <p>Got an idea, a feature request, or an issue to report? We listen to our users!</p>
+  </div>
+</div>
+
+<div id="foot">
+  <svg class="splat" viewBox="0 0 780 230" preserveAspectRatio="none" aria-hidden="true"><path filter="url(#rough)" d="M30 50 L110 20 L260 34 L420 14 L600 30 L735 18 L752 90 L736 150 L748 205 L560 190 L390 208 L200 192 L48 204 L22 140 L34 95 Z" fill="#081030" opacity=".88"/></svg>
+  <svg class="scene" viewBox="0 0 780 170" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <path d="M0 120 Q120 70 260 112 T520 100 T780 118 V170 H0Z" fill="#3f7a2a"/>
+    <path d="M0 140 Q160 104 330 138 T640 130 T780 142 V170 H0Z" fill="#5da536"/>
+    <g fill="#1f4d22"><path d="M60 118 l12 -40 l12 40z"/><path d="M92 124 l10 -32 l10 32z"/><path d="M610 108 l12 -44 l12 44z"/><path d="M642 114 l10 -34 l10 34z"/><path d="M672 110 l13 -46 l13 46z"/><path d="M700 118 l10 -30 l10 30z"/><path d="M180 120 l9 -28 l9 28z"/></g>
+    <g stroke="#1d2b12" stroke-width="2" stroke-linejoin="round">
+      <rect x="336" y="86" width="62" height="38" fill="#e9e2c8"/><path d="M328 88 L367 60 L406 88Z" fill="#8a4a2b"/>
+      <rect x="360" y="102" width="14" height="22" fill="#5a3a22"/><rect x="344" y="94" width="10" height="10" fill="#cfe9ff"/><rect x="382" y="94" width="10" height="10" fill="#cfe9ff"/>
+      <rect x="398" y="98" width="42" height="26" fill="#d9d0b0"/><path d="M394 100 L419 80 L444 100Z" fill="#6f3a22"/>
+    </g>
+    <circle cx="248" cy="60" r="3" fill="#fff" opacity=".6"/><circle cx="520" cy="44" r="2" fill="#fff" opacity=".6"/><circle cx="470" cy="70" r="2" fill="#fff" opacity=".5"/>
+  </svg>
+  <svg class="torn" viewBox="0 0 780 20" preserveAspectRatio="none" aria-hidden="true" style="margin:0 -28px;width:calc(100% + 56px)"><rect filter="url(#rip)" x="-10" y="-4" width="800" height="14" fill="#08112a"/></svg>
+  <div class="row">
+    <div><span class="brand small">Greenbox</span> <small>Inc.</small><br><br><a href="#">About Us</a><a href="#">Contact</a><a href="#">Resource Center</a><a href="#">Support</a></div>
+    <div><br><br><a href="#">Partners</a><a href="#">Careers</a><a href="#">Corporate Policies</a><a href="#">Site Index</a></div>
+    <div><h3>Give social love:</h3><a href="#">Digg</a><a href="#">Delicious</a><a href="#">Facebook</a><a href="#">Twitter</a></div>
+    <div class="faq"><h3>Frequently asked questions:</h3><a href="#">What is Speedframe?</a><a href="#">Is it really free?</a><a href="#">When is the release date?</a><a href="#">Which SyncCore apps are included?</a></div>
+  </div>
+  <div class="legal">&copy; 2003-2026 Greenbox Inc. All rights reserved. Greenbox, Speedframe, and the SyncCore Suite are fictional products and not affiliated with Adobe Systems Incorporated.</div>
+</div>
+
+</div>
+</body>
+</html>
